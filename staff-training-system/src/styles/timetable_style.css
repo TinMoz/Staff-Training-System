@@ -1,0 +1,93 @@
+.timetable-view {
+    padding: 20px;
+    overflow-x: auto;
+  }
+  
+  .timetable-grid {
+    display: flex;
+    min-width: 800px;
+    border: 1px solid #ebeef5;
+  }
+  
+  .time-column, .day-column {
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  .time-header, .day-header {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #f5f7fa;
+    border-bottom: 1px solid #ebeef5;
+    font-weight: 600;
+  }
+  
+  .day-content {
+    position: relative;
+    border-right: 1px solid #ebeef5;
+  }
+  
+  .time-slot {
+    border-bottom: 1px solid #f0f2f5;
+    font-size: 10px;
+    padding-left: 2px;
+    color: #131313;
+    font-size: 8px;
+    padding-left: 1px;
+  }
+  
+  .course-block {
+    position: absolute;
+    left: 0;
+    right: 0;  
+    background: #f0f9eb;
+    border: 2px solid #c2e7b0;
+    border-radius: 2px;
+    overflow: hidden;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .course-block:hover {
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transform: scale(1.02);
+  }
+  
+  .course-content {
+    padding: 2px;
+    width: 100%; 
+    text-align: center; 
+    font-weight: bold;  
+    transform: scale(0.9); 
+    line-height: 1.2 !important;
+    white-space: normal;
+  }
+  .course-block {
+    font-size: 10px; 
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .time-label {
+    font-weight: bold; 
+    margin-right: 8px;  
+    display: inline-block;
+    width: 40px;       
+  }
+  
+ 
+  .time-column {
+    flex: 0 0 60px;
+    min-width: 50px;
+    border-right: 1px solid #ebeef5; 
+    box-sizing: border-box;
+  }
+  .day-column {
+    flex: 1;
+    min-width: 80px;
+  }
+  

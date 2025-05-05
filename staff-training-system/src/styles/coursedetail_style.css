@@ -1,0 +1,185 @@
+.no-hover:hover {
+    background-color: transparent !important;
+}
+
+.course-detail-page{
+    margin-top:250px;
+}
+.course-detail {
+    padding: 20px;
+    overflow-y: visible;  /* 添加滾動條 */
+    min-height: calc(100vh - 180px);
+}
+
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.course-title-section h1 {
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.course-code {
+    font-size: 14px;
+    color: #666;
+    background-color: #f5f7fa;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.enroll-button {
+    font-weight: 600;
+}
+
+.metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.metadata-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.metadata-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.metadata-value {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.course-description {
+    margin-bottom: 30px;
+}
+
+.course-description h3 {
+    margin-bottom: 10px;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.course-description p {
+    line-height: 1.6;
+}
+
+.course-content h3 {
+    margin-bottom: 15px;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.chapter-list {
+    max-height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* 增加間距 */
+}
+
+.chapter-item {
+    margin-bottom: 0; /* 移除舊的下邊距，因為已經用gap控制了 */
+    padding: 15px; /* 增加內邊距 */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08); /* 增強陰影效果 */
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 4px solid #409eff; /* 添加左側邊框作為視覺強調 */
+}
+
+
+.chapter-item:hover {
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+.chapter-content {
+    padding: 15px 10px; /* 增加上下內邊距 */
+    line-height: 1.6;
+}
+
+.chapter-title-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.chapter-index {
+    font-weight: 700;
+    color: #409eff;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.chapter-name {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.el-collapse-item__header {
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.el-collapse-item__wrap {
+    background-color: #f9fafc; /* 內容區背景色與標題區分 */
+    border-radius: 0 0 8px 8px;
+}
+
+.time-conflict-error {
+    background-color: #fff6f6 !important;
+    border: 2px solid #ff7875 !important;
+    color: #ff4d4f !important;
+    padding: 15px 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(255,77,79,0.15) !important;
+}
+
+.course-limit-error {
+    background-color: #fff7e6 !important;
+    border: 2px solid #ffa940 !important;
+    color: #fa8c16 !important;
+    padding: 15px 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(250, 140, 22, 0.15) !important;
+}
+
+
+.no-chapters {
+    text-align: center;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    color: #666;
+}
+
+.course-detail {
+    animation: fadeIn 0.4s ease-out;
+}
+
+
+.page-container .el-button:hover{
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

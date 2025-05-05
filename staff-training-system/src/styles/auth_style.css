@@ -1,0 +1,116 @@
+/* 共享的基礎樣式 */
+.auth-container {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 40px 32px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-container h1 {
+  color: #1f2937;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+
+.input-item {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.error-message {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 共享的按鈕樣式 */
+.auth-button {
+  width: 100%;
+  padding: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+  background: linear-gradient(45deg, hsla(160, 100%, 37%, 1), hsl(158, 98%, 33%)) !important;
+  color: #ffffff !important; /* 修改為更明確的白色 */
+  border: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.page-container .el-button--primary.auth-button {
+  color: white !important;
+}
+
+
+.auth-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px hsla(160, 100%, 37%, 0.25);
+  color: #ffffff !important; /* 確保懸停狀態也是白色 */
+}
+
+/* 共享的鏈接樣式 */
+.auth-link {
+  margin-top: 20px;
+  text-align: center;
+  color: #666;
+}
+
+.auth-link a {
+  color: hsla(160, 100%, 37%, 1);
+  position: relative;
+  padding: 2px 4px;
+}
+
+.auth-link a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: hsla(160, 100%, 37%, 1);
+  transition: width 0.3s ease;
+}
+
+.auth-link a:hover::after {
+  width: 100%;
+}
+
+/* 共享的成功框樣式 */
+.success-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 9999;
+  animation: fadeIn 0.5s;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.role-tag {
+  background: rgba(255,255,255,0.25) !important;
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
