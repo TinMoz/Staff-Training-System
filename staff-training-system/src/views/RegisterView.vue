@@ -1,3 +1,4 @@
+<!--RegisterView-->
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import axios from '../utils/request';
@@ -27,11 +28,10 @@ const roleLabel = computed(() => {
 
 // 檢查用戶名是否已存在（防抖處理，減少API請求）
 const checkUsernameExists = debounce(async () => {
-  // 如果用戶名為空或者已經有基本驗證錯誤，不檢查是否存在
+  // 如果用戶名不符合基本要求，則不發送請求
   if (!form.value.username || form.value.username.includes(' ') || form.value.username.length < 3) {
     return;
   }
-  
   try {
     checkingUsername.value = true;
     const response = await axios.get(`/api/auth/check-username/${form.value.username}`);
@@ -115,6 +115,7 @@ const validateAndRegister = async () => {
   await handleRegister();
 };
 
+// 處理註冊邏輯
 const handleRegister = async () => {
   try {
     await axios.post('/api/auth/register', form.value);
