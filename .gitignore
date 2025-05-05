@@ -2,6 +2,19 @@
 
 node_modules
 
+node_modules/
+dist/
+.env
+.env.local
+
 target
 
 Store/
+
+target/
+*.jar
+application.properties  # 避免上传敏感配置
+
+# 通用
+.idea/
+*.iml
