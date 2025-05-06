@@ -10,7 +10,7 @@ import { Plus } from '@element-plus/icons-vue';
 const courseStore = useCourseStore();
 const adminStore = useAdminStore();
 
-// 引用DOM元素
+// 定義表單和彈窗狀態
 const courseForm = ref<InstanceType<typeof ElForm>>();
 const showAddDialog = ref(false);
 
@@ -59,13 +59,17 @@ const approveRequest = (id: number) => adminStore.processRequest(id, 'approved')
 const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
 </script>
 
+
 <template>
   <div class="page-container">
+    <!--管理員頁面-->
     <div class="admin-view">
       <h1>管理員頁面</h1>
+      <!--添加課程按鈕-->
       <el-button type="primary" @click="handleAddCourse">
         添加課程
       </el-button>
+      <!--課程表格-->
       <el-table
         :data="paginatedCourses"
         style="width: 100%"
@@ -98,7 +102,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
           @current-change="adminStore.handlePageChange"
         />
       </div>
-
+      <!--編輯課程彈窗-->
       <el-dialog 
         v-model="showAddDialog" 
         title="課程編輯" 
@@ -106,21 +110,21 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
         :append-to-body="true" 
         :show-close="false"
         width="800px"
-      >
+      ><!--編輯課程菜單內容-->
         <el-form 
           :model="adminStore.currentCourse" 
           :rules="adminStore.formRules" 
           ref="courseForm"
           label-width="120px"
-        >
+        ><!--課程名稱輸入框-->
           <el-form-item label="課程名稱" prop="title">
             <el-input v-model="adminStore.currentCourse.title" placeholder="例如：企業人力資源管理" />
           </el-form-item>
-          
+          <!--課程代碼輸入框-->
           <el-form-item label="課程代碼" prop="courseCode">
             <el-input v-model="adminStore.currentCourse.courseCode" placeholder="例如：HR-101" />
           </el-form-item>
-
+          <!--課程描述輸入框-->
           <el-form-item label="課程描述" prop="description">
             <el-input 
               v-model="adminStore.currentCourse.description" 
@@ -129,7 +133,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
               placeholder="詳細描述課程內容、目標和收益，例如：本課程涵蓋現代企業人力資源管理的核心理念與實踐..."
             />
           </el-form-item>
-
+          <!--課程學分輸入框-->
           <el-form-item label="課程學分" prop="credits">
             <el-input
               v-model.number="adminStore.currentCourse.credits" 
@@ -139,7 +143,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
               placeholder="1-10"
             />
           </el-form-item>
-
+          <!--指導老師選擇框--> 
           <el-form-item label="指導老師" prop="teacher">
             <el-input
               v-model="adminStore.currentCourse.teacher"
@@ -147,7 +151,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
               style="width: 200px;"
             />
           </el-form-item>
-
+          <!--章節列表-->
           <el-form-item label="章節列表" prop="chapters">
             <transition-group name="chapter" tag="div">
               <div 
@@ -155,18 +159,20 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
                 :key="index"
                 class="chapter-item"
               >
+                <!--章節標題-->
                 <el-input
                   v-model="chapter.title"
                   placeholder="例如：第一章 - 入門概述"
                   style="width: 200px; margin-right: 10px;"
                 />
+                <!--章節內容-->
                 <el-input
                   v-model="chapter.content"
                   placeholder="章節詳細內容，例如：本章節將介紹核心概念和基礎知識..."
                   style="flex: 1;"
                   type="textarea"
                 />
-
+                <!--章節時長-->
                 <el-input
                   v-model.number="chapter.duration"
                   placeholder="120-300"
@@ -178,7 +184,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
                 >
                   <template #append>分鐘</template>
                 </el-input>
-
+                <!--章節刪除按鈕-->
                 <el-button 
                   type="danger" 
                   circle 
@@ -190,6 +196,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
                 </el-button>
               </div>
             </transition-group>
+            <!--添加章節按鈕-->
             <el-button 
               type="primary" 
               @click="adminStore.addChapter"
@@ -201,7 +208,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
             </el-button>
           </el-form-item>
         </el-form>
-
+        <!--保存及取消按鈕-->
         <template #footer>
           <el-button class="cancel-btn" @click="showAddDialog = false">取消</el-button>
           <el-button type="primary" @click="submitForm" class="save-btn">
@@ -209,12 +216,13 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
           </el-button>
         </template>
       </el-dialog>
-
+      <!--報名處理區域-->
       <h2>待處理報名請求</h2>
       <el-table :data="adminStore.paginatedRequests" stripe>
         <el-table-column prop="username" label="用戶" />
         <el-table-column prop="courseTitle" label="課程" />
         <el-table-column label="操作">
+          <!--報名處理區域操作按鈕-->
           <template #default="{ row }">
             <el-button @click="approveRequest(row.id)">通過</el-button>
             <el-button type="danger" @click="rejectRequest(row.id)">拒絕</el-button>
@@ -233,7 +241,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
         />
       </div>
     </div>
-
+    <!--返回主頁-->
     <el-button 
       type="primary" 
       @click="$router.push('/home')"

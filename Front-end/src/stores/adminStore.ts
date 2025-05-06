@@ -5,7 +5,7 @@ import axios from '../utils/request';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { useCourseStore } from './courseStore';
 
-// 相同的介面定義
+// 定義課程和請求的接口
 interface Course {
   id: string;
   title: string;
@@ -23,11 +23,10 @@ interface PendingRequest {
   username: string;
   courseTitle: string;
 }
-
+// 輸出AdminStore到Vue組件
+// 這個store主要用於管理課程和請求的狀態和行為
 export const useAdminStore = defineStore('admin', () => {
   const courseStore = useCourseStore();
-  
-  // 表單和狀態
   const loading = ref(true);
   const currentCourse = ref<Course>({
     id: '',
@@ -46,14 +45,14 @@ export const useAdminStore = defineStore('admin', () => {
   const currentRequestPage = ref(1);
   const requestPageSize = ref(8);
   
-  // 計算屬性
+  // 計算屬性：分頁
   const paginatedRequests = computed(() => {
     const start = (currentRequestPage.value - 1) * requestPageSize.value;
     const end = start + requestPageSize.value;
     return pendingRequests.value.slice(start, end);
   });
   
-  // 表單相關方法
+  // 編輯菜單定義
   const formRules = {
     title: [{ required: true, message: '請輸入課程名稱', trigger: 'blur' }],
     courseCode: [{ required: true, message: '請輸入課程代碼', trigger: 'blur' }],
@@ -207,6 +206,7 @@ export const useAdminStore = defineStore('admin', () => {
     currentRequestPage.value = newPage;
   }
   
+  // 返回store的狀態和方法
   return {
     // 狀態
     loading,

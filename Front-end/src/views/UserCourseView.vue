@@ -4,26 +4,27 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import { ref, onMounted, computed } from 'vue';
 import axios from '../utils/request';
 
-// 確保初始化為空數組
+//初始化狀態變數
 const courses = ref<Array<any>>([]);
 const currentPage = ref(1);
 const pageSize = ref(8);
 
-// 計算屬性：課程總數
+//計算課程總數
 const coursesCount = computed(() => courses.value.length);
 
-// 分頁後的課程
+//分頁後的課程數據
 const paginatedCourses = computed(() => {
   const start = (currentPage.value - 1) * pageSize.value;
   const end = start + pageSize.value;
   return courses.value.slice(start, end);
 });
 
+//處理頁碼變化
 const handlePageChange = (newPage: number) => {
   currentPage.value = newPage;
 };
 
-// 加載課程數據
+//從API加載課程數據
 const loadCourses = async () => {
   try {
     const token = localStorage.getItem('token');
@@ -31,28 +32,29 @@ const loadCourses = async () => {
       ElMessage.error('未登錄或登錄失效');
       return;
     }
-    
-    const response = await axios.get('/api/progress/courses', {
+    //發送請求獲取課程數據
+    const response = await axios.get('/api/progress/courses', { // 透過axios獲取課程進度的api
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
     
-    // 確保正確賦值
+    //確保響應數據為數組
     courses.value = Array.isArray(response.data) ? response.data : [];
     
   } catch (error) {
     console.error('獲取課程進度失敗:', error);
     ElMessage.error('獲取課程數據失敗');
-    // 確保在失敗時也有有效值
     courses.value = [];
   }
 };
 
+//組件掛載時加載數據
 onMounted(() => {
   loadCourses();
 });
 
+//處理退課操作
 const dropCourse = async (courseId: string) => {
   try {
     await ElMessageBox.confirm('確認退課嗎？課程進度將被清除', '警告')
@@ -63,7 +65,7 @@ const dropCourse = async (courseId: string) => {
       }
     });
     
-    // 刷新課程列表
+    //刷新課程列表
     await loadCourses();
     ElMessage.success('退課成功');
   } catch (error) {
@@ -76,9 +78,11 @@ const dropCourse = async (courseId: string) => {
 
 <template>
   <div class="page-container">
+    <!--用戶課程容器-->
     <div class="user-courses">
       <h1>你的課程</h1>
       
+      <!--課程數量警告提示-->
       <el-alert
         v-if="coursesCount >= 5"
         title="您已選擇的課程數量接近上限"
@@ -89,22 +93,28 @@ const dropCourse = async (courseId: string) => {
         style="margin-bottom: 20px"
       />
       
+      <!--無課程提示-->
       <div v-if="coursesCount === 0" class="empty-tip">
         暫無學習記錄
       </div>
+      
+      <!--課程列表表格-->
       <el-table :data="paginatedCourses" style="width: 100%" stripe v-else>
         <el-table-column prop="courseTitle" label="課程名稱" />
         <el-table-column prop="chapterTitle" label="當前章節" />
+        <!--進度列-->
         <el-table-column label="進度">
           <template #default="{ row }">
             <el-progress :percentage="row.progress" />
           </template>
         </el-table-column>
+        <!--學習時間列-->
         <el-table-column label="最後學習時間">
           <template #default="{ row }">
             {{ new Date(row.lastAccessed).toLocaleString() }}
           </template>
         </el-table-column>
+        <!--詳情列-->
         <el-table-column label="詳情">
           <template #default="{ row }">
             <router-link :to="`/courses/${row.courseId}`">
@@ -112,6 +122,7 @@ const dropCourse = async (courseId: string) => {
             </router-link>
           </template>
         </el-table-column>
+        <!--操作列-->
         <el-table-column label="操作">
           <template #default="{ row }">
             <el-button 
@@ -124,7 +135,7 @@ const dropCourse = async (courseId: string) => {
         </el-table-column>
       </el-table>
       
-      <!-- 分頁組件 -->
+      <!--分頁組件-->
       <div class="pagination-container" v-if="coursesCount > pageSize">
         <el-pagination
           layout="prev, pager, next"
@@ -136,6 +147,7 @@ const dropCourse = async (courseId: string) => {
       </div>
     </div>
     
+    <!--返回首頁按鈕-->
     <el-button 
       type="primary" 
       @click="$router.push('/home')"
@@ -146,20 +158,3 @@ const dropCourse = async (courseId: string) => {
   </div>
 </template>
 
-<style scoped>
-.user-courses {
-  padding: 20px;
-}
-
-.pagination-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.empty-tip {
-  text-align: center;
-  color: #999;
-  padding: 20px;
-}
-</style>

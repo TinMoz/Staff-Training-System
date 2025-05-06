@@ -60,10 +60,11 @@ onMounted(async () => {
 <template>
   <div class="page-container">
     <div>
+      <!--課程列表區域-->
       <div class="course-list">
-        <h1>课程列表</h1>
+        <h1>課程列表</h1>
         
-        <!-- 增加搜索區域，包含搜索類型選擇和搜索框 -->
+        <!--搜索區域-->
         <div class="search-container">
           <input
             v-model="searchQuery"
@@ -79,29 +80,29 @@ onMounted(async () => {
             <option label="按指導老師" value="teacher"></option>
           </select>
         </div>
-        <!-- 課程列表 -->
+        
+        <!--課程表格-->
         <el-table 
           :data="paginatedCourses" 
           v-loading="loading" 
           style="width: 100%"
           stripe
         >
-          <!-- 課程名稱列 -->
           <el-table-column prop="title" label="課程名稱" />
           <el-table-column prop="courseCode" label="課程編號"/>
-          <!-- 積分列 -->
           <el-table-column prop="credits" label="學分" />
-          <!-- 指導老師列 -->
           <el-table-column prop="teacher" label="指導老師" />
-          <!-- 操作列（僅管理員可見） 可刪除課程-->
+          
+          <!--管理員操作列-->
           <el-table-column label="操作" v-if="userStore.role === 'ADMIN'">
             <template #default="scope">
               <el-button type="danger" @click="courseStore.deleteCourse(scope.row.id)">
-                删除
+                刪除
               </el-button>
             </template>
           </el-table-column>
-          <!-- 詳情列 -->
+          
+          <!--詳情列-->
           <el-table-column label="詳情">
             <template #default="scope">
               <router-link :to="`/courses/${scope.row.id}`">查看詳情</router-link>
@@ -109,7 +110,7 @@ onMounted(async () => {
           </el-table-column>
         </el-table>
         
-        <!-- 分頁组件 -->
+        <!--分頁組件-->
         <div class="pagination-container" v-if="filteredCourses.length > pageSize">
           <el-pagination
             layout="prev, pager, next"
@@ -121,11 +122,13 @@ onMounted(async () => {
         </div>
       </div>
       
-      <!-- 無課程提示 -->
+      <!--無課程提示-->
       <div v-if="filteredCourses.length === 0" class="empty-tip">
-        {{ searchQuery ? '沒有相關課程' : '暫無課程數據，請聯系管理員添加。' }}
+        {{ searchQuery ? '沒有相關課程' : '暫無課程數據，請聯繫管理員添加。' }}
       </div>
     </div>
+    
+    <!--返回首頁按鈕-->
     <el-button 
       type="primary" 
       @click="$router.push('/home')"
@@ -187,6 +190,4 @@ onMounted(async () => {
 .search-input:focus {
   border-color: #409eff;
 }
-
-
 </style>

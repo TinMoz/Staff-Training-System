@@ -1,4 +1,4 @@
-<!--RegisterView-->
+<!--RegisterView.vue-->
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import axios from '../utils/request';
@@ -34,7 +34,7 @@ const checkUsernameExists = debounce(async () => {
   }
   try {
     checkingUsername.value = true;
-    const response = await axios.get(`/api/auth/check-username/${form.value.username}`);
+    const response = await axios.get(`/api/auth/check-username/${form.value.username}`); // 透過axios獲取用戶名是否存在的api
     if (response.data.exists) {
       usernameError.value = '用戶名已被註冊';
     }
@@ -136,9 +136,11 @@ const handleRegister = async () => {
 
 <template>
   <div class="page-container">
+    <!--註冊容器-->
     <div class="auth-container register">
       <h1>創建新賬號</h1>
       
+      <!--註冊成功提示區-->
       <div v-if="registerSuccess" class="success-message">
           <el-icon class="success-icon"><CircleCheck /></el-icon>
           <h3>🎉 註冊成功！</h3>
@@ -147,7 +149,9 @@ const handleRegister = async () => {
           <p>2秒後跳轉到登錄頁...</p>
       </div>
       
+      <!--註冊表單-->
       <form v-else @submit.prevent="validateAndRegister" class="register-form">
+        <!--用戶名輸入組-->
         <div class="form-group">
           <el-input
             v-model="form.username"
@@ -159,6 +163,7 @@ const handleRegister = async () => {
           <div v-if="usernameError" class="field-error">{{ usernameError }}</div>
         </div>
         
+        <!--密碼輸入組-->
         <div class="form-group">
           <el-input
             v-model="form.password"
@@ -171,6 +176,7 @@ const handleRegister = async () => {
           <div v-if="passwordError" class="field-error">{{ passwordError }}</div>
         </div>
         
+        <!--郵箱輸入組-->
         <div class="form-group">
           <el-input
             v-model="form.email"
@@ -181,6 +187,7 @@ const handleRegister = async () => {
           <div v-if="emailError" class="field-error">{{ emailError }}</div>
         </div>
         
+        <!--表單操作區-->
         <div class="form-actions">
           <el-button 
             type="primary" 
@@ -190,11 +197,13 @@ const handleRegister = async () => {
           >註冊</el-button>
         </div>
         
+        <!--登錄跳轉-->
         <div class="auth-link">
           已有賬號？ <router-link to="/login">去登錄</router-link>
         </div>
       </form>
       
+      <!--錯誤提示區-->
       <div v-if="errorMessage" class="error-message">
         <el-alert
           :title="errorMessage"
@@ -206,7 +215,5 @@ const handleRegister = async () => {
     </div>
   </div>
 </template>
-
-
 
 <style src="../styles/auth_style.css"></style>

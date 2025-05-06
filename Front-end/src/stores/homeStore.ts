@@ -4,7 +4,8 @@ import { ref, computed } from 'vue';
 import axios from '../utils/request';
 import { useUserStore } from './userStore';
 import { useCourseStore } from './courseStore';
-
+// 輸出 HomeStore 到 Vue 組件
+// 此Store主要用於定義首頁的狀態和行為
 export const useHomeStore = defineStore('home', () => {
   // 引入其他store
   const userStore = useUserStore();
@@ -35,10 +36,10 @@ export const useHomeStore = defineStore('home', () => {
     const courseMap = new Map();
     
     // 添加進度信息
-    recentCourses.value.forEach(course => {
-      courseMap.set(course.courseId, {
-        ...course,
-        id: `course-${course.courseId}`,
+    recentCourses.value.forEach(course => { // 遍歷最近課程
+      courseMap.set(course.courseId, { 
+        ...course, 
+        id: `course-${course.courseId}`, 
         weekday: undefined,
         startTime: undefined,
         endTime: undefined,
@@ -47,8 +48,8 @@ export const useHomeStore = defineStore('home', () => {
     });
     
     // 添加時間表信息
-    timetable.value.forEach(item => {
-      const courseId = item.courseId;
+    timetable.value.forEach(item => { // 遍歷時間表
+      const courseId = item.courseId; 
       if (courseMap.has(courseId)) {
         // 如果課程已經存在，則合併信息
         const existingCourse = courseMap.get(courseId);
@@ -71,7 +72,7 @@ export const useHomeStore = defineStore('home', () => {
     // 轉換回數組並排序
     return Array.from(courseMap.values()).sort((a, b) => {
       // 首先按星期排序
-      const dayA = a.weekday !== undefined ? a.weekday : 7; // 未定義的放到最後
+      const dayA = a.weekday !== undefined ? a.weekday : 7;
       const dayB = b.weekday !== undefined ? b.weekday : 7;
       if (dayA !== dayB) return dayA - dayB;
       
@@ -85,7 +86,7 @@ export const useHomeStore = defineStore('home', () => {
     });
   });
   
-  // 分頁後的數據
+  // 計算屬性:分頁
   const paginatedCourseData = computed(() => {
     const start = (currentPage.value - 1) * pageSize.value;
     const end = start + pageSize.value;
@@ -147,23 +148,23 @@ export const useHomeStore = defineStore('home', () => {
       
       // 管理員和普通用戶不同接口
       const url = userStore.role === 'ADMIN' 
-        ? '/api/progress/admin-stats'
-        : '/api/progress/stats';
+        ? '/api/progress/admin-stats' // 管理員的統計信息
+        : '/api/progress/stats'; // 普通用戶的統計信息
   
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      
+      // 根據用戶角色權限顯示不同內容
       stats.value = userStore.role === 'ADMIN' 
         ? {
             totalCourses: actualTotalCourses.value,
-            enrolledCourses: 0, // 管理員不顯示
-            completedChapters: 0 // 管理員不顯示
+            enrolledCourses: 0, 
+            completedChapters: 0 // 管理員不顯示這些數據
           }
         : {
-            totalCourses: actualTotalCourses.value,
+            totalCourses: actualTotalCourses.value, 
             enrolledCourses: res.data.enrolled || 0,
-            completedChapters: res.data.completedChapters || 0
+            completedChapters: res.data.completedChapters || 0 // 普通用戶顯示這些數據
           };
     } catch (error) {
       console.error('獲取統計信息失敗:', error);
@@ -177,7 +178,7 @@ export const useHomeStore = defineStore('home', () => {
         await courseStore.fetchCourses();
       }
       
-      await Promise.all([
+      await Promise.all([ // 並行獲取數據
         fetchRecentCourses(),
         fetchTimetable(),
         fetchStats(),

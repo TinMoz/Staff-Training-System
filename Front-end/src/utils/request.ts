@@ -2,26 +2,26 @@
 import axios from 'axios';
 import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
+//此為axios的請求攔截器，主要用於攔截請求並添加JWT token到請求頭中
 //建立AnxiosInstance
 const service: AxiosInstance = axios.create({
-    baseURL: "http://localhost:8080", // 确保此变量已配置
-    timeout: 10000,
+    baseURL: "http://localhost:8080", //後端API的基礎URL，建立後端鏈接
+    timeout: 10000, //請求超時時間
 });
 
-// 2. 請求攔截（JWT）
+// 請求攔截器
 service.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-      // 從 localStorage 獲取 token（根據實際存儲位置調整）
-      const token = localStorage.getItem("token");
-      if (token && config.headers) {
-        config.headers.Authorization = `Bearer ${token}`;
+    (config: InternalAxiosRequestConfig) => { 
+      const token = localStorage.getItem("token"); //從localStorage獲取token
+      if (token && config.headers) {    //如果token存在，則將其添加到請求頭中
+        config.headers.Authorization = `Bearer ${token}`;  //添加Authorization頭
       }
       return config;
     },
     (error) => {
-      return Promise.reject(error);
+      return Promise.reject(error); //如果請求失敗，則返回錯誤
     }
   );
   
-// 3. 导出实例
+// 輸出攔截器
 export default service;

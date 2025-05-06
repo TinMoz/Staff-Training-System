@@ -17,11 +17,11 @@ onMounted(() => {
 
 <template>
   <div class="page-container" :class="{ 'user-home': userStore.isAuthenticated && userStore.role === 'USER' }">
-    <!-- 添加一個頂部安全區域 div -->
+    <!--頂部安全區域-->
     <div class="top-safe-area" aria-hidden="true"></div>
     
     <div class="home-view">
-      <!-- 未登錄狀態 -->
+      <!--未登錄狀態-->
       <div v-if="!userStore.isAuthenticated" class="login-prompt">
         <h1>歡迎來到課程系統</h1>
         <p>請先登錄以查看您的學習數據</p>
@@ -30,11 +30,11 @@ onMounted(() => {
         </router-link>
       </div>
 
-      <!-- 已登錄狀態 -->
+      <!--已登錄狀態-->
       <template v-else>
         <h1>歡迎回來，{{ userStore.username }}！🎉</h1>
         
-        <!-- 統計卡片 -->
+        <!--統計卡片區域-->
         <div class="stats-grid">
           <el-card class="stat-card">
             <div class="stat-content">
@@ -46,7 +46,7 @@ onMounted(() => {
             </div>
           </el-card>
           
-          <!-- 管理員專屬卡片 -->
+          <!--管理員專屬卡片-->
           <el-card v-if="userStore.role === 'ADMIN'" class="stat-card">
             <div class="stat-content">
               <el-icon class="stat-icon"><Bell /></el-icon>
@@ -57,7 +57,7 @@ onMounted(() => {
             </div>
           </el-card>
 
-          <!-- 普通用戶卡片 -->
+          <!--普通用戶卡片-->
           <template v-if="userStore.role !== 'ADMIN'">
             <el-card class="stat-card">
               <div class="stat-content">
@@ -81,7 +81,7 @@ onMounted(() => {
           </template>
         </div>
 
-        <!-- 快捷操作 -->
+        <!--快捷操作按鈕區-->
         <div class="quick-actions">
           <el-button 
             type="primary" 
@@ -116,7 +116,7 @@ onMounted(() => {
           </el-button>
         </div>
 
-        <!-- 合併後的課程時間表（僅普通用戶） -->
+        <!--學習進度卡片-->
         <el-card v-if="userStore.role !== 'ADMIN'" class="section-card">
           <template #header>
             <div class="card-header">
@@ -126,8 +126,9 @@ onMounted(() => {
           </template>
           
           <div v-if="homeStore.mergedCourseData.length > 0">
-            <!-- 使用分頁後的數據 -->
+            <!--課程時間表項目列表-->
             <div v-for="item in homeStore.paginatedCourseData" :key="item.id" class="timetable-item">
+              <!--時間信息區域-->
               <div class="time-info">
                 <div class="weekday">
                   {{ item.completed ? '已完成' : homeStore.getWeekdayName(item.weekday) }}
@@ -139,6 +140,7 @@ onMounted(() => {
                   <el-tag type="success" size="small">100%</el-tag>
                 </div>
               </div>
+              <!--課程詳情區域-->
               <div class="course-details">
                 <div class="course-title">{{ item.courseTitle }}</div>
                 <div class="chapter">{{ item.chapterTitle }}</div>
@@ -151,6 +153,7 @@ onMounted(() => {
                   />
                 </div>
               </div>
+              <!--課程操作區域-->
               <div class="course-actions">
                 <el-button 
                   type="text" 
@@ -161,7 +164,7 @@ onMounted(() => {
               </div>
             </div>
             
-            <!-- 添加分頁控件 -->
+            <!--分頁控件-->
             <div class="pagination-container" v-if="homeStore.mergedCourseData.length > homeStore.pageSize">
               <el-pagination
                 background
@@ -173,10 +176,12 @@ onMounted(() => {
               />
             </div>
           </div>
+          <!--空數據提示-->
           <div v-else class="empty-tip">
             暫無學習課程和安排
           </div>
           
+          <!--查看全部按鈕-->
           <div class="view-all-link" v-if="homeStore.mergedCourseData.length > 0">
             <el-button type="primary" plain @click="$router.push('/user-timetable')">
               查看完整時間表
@@ -189,95 +194,3 @@ onMounted(() => {
 </template>
 
 <style src="../styles/home_style.css"></style>
-<style scoped>
-/* 頂部安全區域樣式 */
-.top-safe-area {
-  height: 10px;
-  width: 100%;
-  visibility: hidden;
-}
-
-.icon-left {
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-/* 確保按鈕內容居中 */
-.quick-actions .el-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 修改合併後的時間表項樣式 */
-.timetable-item {
-  display: flex;
-  padding: 16px;
-  border-bottom: 1px solid #eee;
-  align-items: center;
-  transition: background-color 0.2s;
-}
-
-.timetable-item:hover {
-  background-color: #f9f9f9;
-}
-
-.timetable-item:last-child {
-  border-bottom: none;
-}
-
-.time-info {
-  text-align: center;
-  min-width: 100px;
-  margin-right: 16px;
-  border-right: 1px solid #eee;
-  padding-right: 16px;
-}
-
-.weekday {
-  font-weight: 700;
-  color: #409eff;
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.time-info .completed {
-  display: flex;
-  justify-content: center;
-}
-
-.course-details {
-  flex: 1;
-}
-
-.course-title {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.progress-container {
-  margin-top: 8px;
-}
-
-.course-actions {
-  min-width: 100px;
-  text-align: right;
-}
-
-.view-all-link {
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* 添加分頁樣式 */
-.pagination-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.pagination-container .el-pagination {
-  padding: 10px 0;
-}
-</style>

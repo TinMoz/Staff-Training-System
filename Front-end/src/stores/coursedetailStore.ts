@@ -6,6 +6,8 @@ import { useCourseStore } from './courseStore';
 import { useUserStore } from './userStore';
 import { ElMessage } from 'element-plus';
 
+// 輸出 CourseDetailStore 到 Vue 組件
+// 定義課程詳情的 store
 export const useCourseDetailStore = defineStore('courseDetail', () => {
   // 引入其他 store
   const courseStore = useCourseStore();
@@ -27,13 +29,13 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   const currentPage = ref(1);
   const pageSize = ref(4);
   
-  // 常量
+  // 日期格式化
   const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
   
   // 自動保存的定時器
   let autoSaveTimer: ReturnType<typeof setInterval>;
   
-  // 計算屬性：分頁後的章節
+  // 計算屬性：分頁
   const paginatedChapters = computed(() => {
     if (!courseStore.detail?.chapters) return [];
     
@@ -208,6 +210,7 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
     currentPage.value = 1;
   }
   
+  // 返回狀態和方法
   return {
     // 狀態
     activeChapter,
