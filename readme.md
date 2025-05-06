@@ -45,7 +45,7 @@ MySQL 8.0+ https://dev.mysql.com/downloads/installer/
 
 9.輸入 'npm run dev' 以運行前端項目
 
-10.完成
+10.在前端項目輸入 'o + enter' 開啟網頁
 
 ## 配置说明
 
