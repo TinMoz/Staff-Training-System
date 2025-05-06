@@ -1,10 +1,13 @@
+-- 字符集設定
+SET NAMES utf8mb4;
 -- 創建資料庫並設定字符集
-DROP DATABASE IF EXISTS staff_training_system_database;
-CREATE DATABASE staff_training_system_database 
+DROP DATABASE IF EXISTS staff_training_system_database_TEST;
+CREATE DATABASE staff_training_system_database_TEST 
   DEFAULT CHARACTER SET utf8mb4 
   COLLATE utf8mb4_0900_ai_ci;
 
-USE staff_training_system_database;
+
+USE staff_training_system_database_TEST;
 
 -- 創建 users 表
 CREATE TABLE users (
@@ -19,6 +22,54 @@ CREATE TABLE users (
   UNIQUE KEY email (email),
   KEY idx_username (username)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+
+-- 創建 courses 表
+CREATE TABLE courses (
+  id int NOT NULL AUTO_INCREMENT,
+  title varchar(200) NOT NULL,
+  description text NOT NULL,
+  course_code varchar(255) DEFAULT NULL,
+  credits int DEFAULT NULL,
+  created_by int NOT NULL,
+  created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  teacher varchar(255) DEFAULT NULL COMMENT '教師全名（中文）',
+  PRIMARY KEY (id),
+  KEY created_by (created_by),
+  KEY idx_title (title),
+  CONSTRAINT courses_ibfk_1 FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4;
+
+-- 創建 chapters 表
+CREATE TABLE chapters (
+  id int NOT NULL AUTO_INCREMENT,
+  course_id int NOT NULL,
+  title varchar(200) NOT NULL,
+  content mediumtext NOT NULL,
+  duration int DEFAULT NULL COMMENT '分钟',
+  order_num int DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY idx_course (course_id),
+  CONSTRAINT chapters_ibfk_1 FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
+
+-- 創建 learning_progress 表
+CREATE TABLE learning_progress (
+  id int NOT NULL AUTO_INCREMENT,
+  user_id int NOT NULL,
+  course_id int NOT NULL,
+  chapter_id int NOT NULL,
+  Completed tinyint(1) DEFAULT '0',
+  progress int DEFAULT '0',
+  last_accessed timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_user_chapter (user_id, chapter_id),
+  KEY idx_user (user_id),
+  KEY idx_chapter (chapter_id),
+  KEY fk_course (course_id),
+  CONSTRAINT fk_course FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE,
+  CONSTRAINT learning_progress_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+  CONSTRAINT learning_progress_ibfk_2 FOREIGN KEY (chapter_id) REFERENCES chapters (id) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
 -- 插入 users 數據
 INSERT INTO users (id, username, password, email, role, created_at) VALUES
@@ -39,21 +90,6 @@ INSERT INTO users (id, username, password, email, role, created_at) VALUES
 (23, 'SophiaMartin_Data', '$2a$10$QW5n3XkZvMnj6.fTjdfuzuAOIWYHJJWN6MtUx1.v8Aaq3KU5ev5XC', 'sophia.data@samplemail.com', 'USER', '2025-05-05 17:13:56'),
 (24, 'AAAA', '$2a$10$UPdL7aEO7yFXXNoUvZIQkueAJCIfYzLJN4xfkUPfKuORFMwAN9YPa', 'AAAAA@gmail.com', 'USER', '2025-05-05 17:27:42');
 
--- 創建 courses 表
-CREATE TABLE courses (
-  id int NOT NULL AUTO_INCREMENT,
-  title varchar(200) NOT NULL,
-  description text NOT NULL,
-  course_code varchar(255) DEFAULT NULL,
-  credits int DEFAULT NULL,
-  created_by int NOT NULL,
-  created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  teacher varchar(255) DEFAULT NULL COMMENT '教師全名（中文）',
-  PRIMARY KEY (id),
-  KEY created_by (created_by),
-  KEY idx_title (title),
-  CONSTRAINT courses_ibfk_1 FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4;
 
 -- 插入 courses 數據
 INSERT INTO courses (id, title, description, course_code, credits, created_by, created_at, teacher) VALUES
@@ -70,18 +106,6 @@ INSERT INTO courses (id, title, description, course_code, credits, created_by, c
 (61, '跨部门协作', '打破部门壁垒的高效协作策略', 'CROSS-88', 3, 11, '2025-05-05 15:32:53', '临时教师老师'),
 (62, '商务礼仪规范', '职场形象管理与商务场合礼仪', 'BETQ-307', 2, 1, '2025-05-05 15:32:53', '周华老师');
 
--- 創建 chapters 表
-CREATE TABLE chapters (
-  id int NOT NULL AUTO_INCREMENT,
-  course_id int NOT NULL,
-  title varchar(200) NOT NULL,
-  content mediumtext NOT NULL,
-  duration int DEFAULT NULL COMMENT '分钟',
-  order_num int DEFAULT NULL,
-  PRIMARY KEY (id),
-  KEY idx_course (course_id),
-  CONSTRAINT chapters_ibfk_1 FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
 -- 完整插入 chapters 數據
 INSERT INTO chapters (id, course_id, title, content, duration, order_num) VALUES
@@ -123,25 +147,7 @@ INSERT INTO chapters (id, course_id, title, content, duration, order_num) VALUES
 (120, 62, '职业形象管理', '制定场合着装密码：商务正式（男士深色套装+法式袖扣，女士套裙+裸色高跟鞋）、商务休闲（POLO衫+休闲西裤）。细节检查清单包含：袖长（西装露出1cm衬衫）、领带长度（尖部对齐皮带扣）、妆容浓度（眼影不超过双色）。建立应急形象包（备用衬衫/去渍笔/迷你熨斗），应对突发状况。', 150, 1),
 (121, 62, '国际商务礼仪', '掌握跨文化礼仪核心差异：日本客户交换名片双手接收并默读内容，中东客户避免左手递物。宴请礼仪包含：法式餐叉由外至内使用，红酒斟倒不超过1/3杯。会议座位遵循"面门为尊"，使用Webex虚拟背景统一团队形象。邮件签名附加文化备注（如对德国客户注明精确时间格式"14:00 CET"）。', 180, 2);
 
--- 創建 learning_progress 表
-CREATE TABLE learning_progress (
-  id int NOT NULL AUTO_INCREMENT,
-  user_id int NOT NULL,
-  course_id int NOT NULL,
-  chapter_id int NOT NULL,
-  Completed tinyint(1) DEFAULT '0',
-  progress int DEFAULT '0',
-  last_accessed timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uk_user_chapter (user_id, chapter_id),
-  KEY idx_user (user_id),
-  KEY idx_chapter (chapter_id),
-  KEY fk_course (course_id),
-  CONSTRAINT fk_course FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE,
-  CONSTRAINT learning_progress_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-  CONSTRAINT learning_progress_ibfk_2 FOREIGN KEY (chapter_id) REFERENCES chapters (id) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
-
+-- 插入learning_progress數據
 INSERT INTO learning_progress (id, user_id, course_id, chapter_id, Completed, progress, last_accessed) VALUES
 (207, 2, 41, 35, 1, 100, '2025-05-05 08:23:17'),
 (208, 2, 5, 19, 1, 100, '2025-05-07 14:55:02'),
