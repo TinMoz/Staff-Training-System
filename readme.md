@@ -36,6 +36,7 @@ MySQL https://dev.mysql.com/downloads/installer/
 ----------------------------------------------------------------------------------------------------------------
 
 application.properties設置數據庫:
+
 在application.properties內輸入以下字段
 
     spring.datasource.url=jdbc:mysql://localhost:3306/staff_training_system_database
