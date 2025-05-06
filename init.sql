@@ -74,6 +74,21 @@ CREATE TABLE learning_progress (
   CONSTRAINT learning_progress_ibfk_2 FOREIGN KEY (chapter_id) REFERENCES chapters (id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
+-- 創建 enrollment_requests 表
+- 創建 enrollment_requests 表
+CREATE TABLE enrollment_requests (
+  id int NOT NULL AUTO_INCREMENT,
+  created_at datetime(6) DEFAULT NULL,
+  status enum('APPROVED','PENDING','REJECTED') DEFAULT 'PENDING',
+  course_id int NOT NULL,
+  user_id int NOT NULL,
+  PRIMARY KEY (id),
+  KEY FKdqsxlfvced3i9b4g6dn9fefsm (course_id),
+  KEY FKtf9o2vj6hdfp0ieduenwkn03d (user_id),
+  CONSTRAINT FKdqsxlfvced3i9b4g6dn9fefsm FOREIGN KEY (course_id) REFERENCES courses (id),
+  CONSTRAINT FKtf9o2vj6hdfp0ieduenwkn03d FOREIGN KEY (user_id) REFERENCES users (id)
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- 插入 users 數據
 INSERT INTO users (id, username, password, email, role, created_at) VALUES
 (1, 'admin', '$2a$10$vvUX82CxXPBaRzjnp6i9y.GqNM5SkndsmNWNx4qNsXWLSKWqnlvg2', 'admin@example.com', 'ADMIN', '2025-04-23 21:52:58'),
