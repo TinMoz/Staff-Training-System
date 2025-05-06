@@ -75,7 +75,6 @@ CREATE TABLE learning_progress (
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
 -- 創建 enrollment_requests 表
-- 創建 enrollment_requests 表
 CREATE TABLE enrollment_requests (
   id int NOT NULL AUTO_INCREMENT,
   created_at datetime(6) DEFAULT NULL,
