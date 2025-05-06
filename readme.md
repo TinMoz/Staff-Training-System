@@ -31,7 +31,7 @@ MySQL 8.0+ https://dev.mysql.com/downloads/installer/
 
 2.輸入 'SOURCE /your path/Staff_Training_System/init.sql' 以配置SQL
 
-3.在application.properties設置數據庫
+3.在src/main/下方添加resources文件夾並新增application.properties以設置數據庫
 
 4.打開新的cmd 進入項目的後端部分 'cd /your path/Staff_Training_System/Back-end'
 

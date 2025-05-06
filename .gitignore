@@ -14,7 +14,7 @@ Store/
 target/
 *.jar
 application.properties  # 避免上传敏感配置
-
+resources/
 # 通用
 .idea/
 *.iml
