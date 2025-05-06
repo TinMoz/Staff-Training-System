@@ -19,6 +19,8 @@ MySQL https://dev.mysql.com/downloads/installer/
 
 2.輸入 SOURCES /your path/Staff_Training_System/init.sql以配置SQL
 
+3.在application.properties設置數據庫
+
 3.使用cmd 進入項目的後端部分/Back-end
 
 4.輸入 mvn clean install 後耐心等待
@@ -33,5 +35,11 @@ MySQL https://dev.mysql.com/downloads/installer/
 
 ----------------------------------------------------------------------------------------------------------------
 
+application.properties設置數據庫:
+在application.properties內輸入以下字段
 
-
+    spring.datasource.url=jdbc:mysql://localhost:3306/staff_training_system_database
+    spring.datasource.username=root
+    spring.datasource.password=你的MySQL密碼 需自行填寫
+    spring.jpa.hibernate.ddl-auto=validate
+    spring.jpa.show-sql=true
