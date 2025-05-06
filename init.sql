@@ -1,13 +1,13 @@
 -- 字符集設定
 SET NAMES utf8mb4;
 -- 創建資料庫並設定字符集
-DROP DATABASE IF EXISTS staff_training_system_database_TEST;
-CREATE DATABASE staff_training_system_database_TEST 
+DROP DATABASE IF EXISTS staff_training_system_database;
+CREATE DATABASE staff_training_system_database
   DEFAULT CHARACTER SET utf8mb4 
   COLLATE utf8mb4_0900_ai_ci;
 
 
-USE staff_training_system_database_TEST;
+USE staff_training_system_database;
 
 -- 創建 users 表
 CREATE TABLE users (
