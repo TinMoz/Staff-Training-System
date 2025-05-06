@@ -33,7 +33,7 @@ MySQL 8.0+ https://dev.mysql.com/downloads/installer/
 
 3.在application.properties設置數據庫
 
-4.使用cmd 進入項目的後端部分 'cd /your path/Staff_Training_System/Back-end'
+4.打開新的cmd 進入項目的後端部分 'cd /your path/Staff_Training_System/Back-end'
 
 5.輸入 'mvn clean install' 後耐心等待
 
