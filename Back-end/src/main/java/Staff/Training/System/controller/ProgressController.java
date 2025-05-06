@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import staff.training.system.model.dto.ChapterTimeDTO;
 import staff.training.system.model.dto.ProgressDTO;
-import staff.training.system.model.dto.ProgressUpdateRequest;
+import staff.training.system.model.dto.ProgressRequestDTO;
 import staff.training.system.security.JwtUtils;
 import staff.training.system.service.ProgressService;
 
@@ -26,7 +26,7 @@ public class ProgressController{
     
     @PutMapping
     public ResponseEntity<Void> updateProgress(
-        @RequestBody ProgressUpdateRequest request,
+        @RequestBody ProgressRequestDTO request,
         @RequestHeader("Authorization") String token) {
     
         Integer userID = jwtUtils.getUserIDFromToken(token.replace("Bearer ", ""));

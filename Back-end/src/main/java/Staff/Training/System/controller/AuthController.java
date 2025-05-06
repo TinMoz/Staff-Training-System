@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import staff.training.system.model.dto.LoginRequest;
+import staff.training.system.model.dto.LoginRequestDTO;
 import staff.training.system.model.dto.RegisterRequestDTO;
 import staff.training.system.model.entity.User;
 import staff.training.system.model.entity.Role;
@@ -59,7 +59,7 @@ public class AuthController {
 
 
     @PostMapping("/login") 
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         // 验证用户名是否存在
         User user = userRepository.findByUsername(loginRequest.getUsername())
             .orElseThrow(() -> new RuntimeException("用户不存在"));
