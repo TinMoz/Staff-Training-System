@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.4</version>
+		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>Staff.Training.System</groupId>
-	<artifactId>Staff-Training-System</artifactId>
+	<groupId>Back-end</groupId>
+	<artifactId>Back-end</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Staff-Training-System</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Back-end</name>
+	<description>Back-end</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -42,6 +42,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -56,7 +57,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.36</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -125,7 +125,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 

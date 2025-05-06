@@ -1,7 +1,7 @@
-package Staff.Training.System.Repository;
+package staff.training.system.repository;
 
-import Staff.Training.System.EnrollmentRequest;
 import jakarta.transaction.Transactional;
+import staff.training.system.model.entity.EnrollmentRequest;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

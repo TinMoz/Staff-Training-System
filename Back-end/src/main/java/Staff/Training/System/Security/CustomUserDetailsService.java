@@ -1,11 +1,12 @@
-package Staff.Training.System.Security;
+package staff.training.system.security;
 
-import Staff.Training.System.User;
-import Staff.Training.System.Repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import staff.training.system.model.entity.User;
+import staff.training.system.repository.UserRepository;
 
 @Service // 关键注解，注册为 Bean
 public class CustomUserDetailsService implements UserDetailsService {
