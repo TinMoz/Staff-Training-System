@@ -41,9 +41,9 @@ export const useAdminStore = defineStore('admin', () => {
   
   // 分頁相關
   const currentPage = ref(1);
-  const pageSize = ref(8);
+  const pageSize = ref(5);
   const currentRequestPage = ref(1);
-  const requestPageSize = ref(8);
+  const requestPageSize = ref(4);
   
   // 計算屬性：分頁
   const paginatedRequests = computed(() => {

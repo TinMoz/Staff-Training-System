@@ -1,8 +1,6 @@
 .admin-view {
-  min-height: 100vh; 
   display: flex;
   flex-direction: column;
-  margin-top: 180px
 }
 
 @keyframes modalIn {
