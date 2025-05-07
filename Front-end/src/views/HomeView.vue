@@ -131,7 +131,7 @@ onMounted(() => {
               <!--時間信息區域-->
               <div class="time-info">
                 <div class="weekday">
-                  {{ item.completed ? '已完成' : homeStore.getWeekdayName(item.weekday) }}
+                  {{ item.completed ? '已完成' : (item.weekday !== undefined ? homeStore.getWeekdayName(item.weekday) : '未安排') }}
                 </div>
                 <div class="time-range" v-if="!item.completed">
                   {{ item.startTime || '未安排' }} - {{ item.endTime || '未安排' }}

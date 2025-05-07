@@ -10,6 +10,30 @@
 - 課程報名與審批
 - 可讀時間表
 
+## 技術
+
+- 前端: Vue框架 + ts
+        --使用Pinia管理Store以及Router路由管理進行頁面跳轉
+        --使用element plus UI組件庫搭建前端UI畫面
+        --使用 Axios 處理前後端通訊
+        --JWT認證 用於為用戶進行身份驗證
+
+- 後端: java spring
+        --使用Spring Boot框架進行開發, 並使用Spring Security控制API訪問並提供,
+            同時使用Spring Data JPA實行行自動化數據庫訪問層實現
+        
+        --Hibernate Orm進行Java和數據庫表的對象映射,實現JPA功能生成並執行SQL語句
+        --使用BCrypt進行密碼加密
+        --JWT令牌 進行用戶身份驗證與 Spring Security 集成的自定義認證過濾器
+
+- 數據: MySQL
+        -使用MySQL進行數據存儲供後端Hibernate ORM執行實際數據庫操作
+
+- 部署: Maven + Vite + Git
+        - Maven 進行後端建構與管理後端依賴的工具
+        - npm/Vite 進行前端建構與管理package
+        - Git 進行分佈式控制版本並發布Github
+
 ## 前置需求
 
 要順利運行此項目 請先安裝下列必須環境變量及軟件

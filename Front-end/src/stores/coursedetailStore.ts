@@ -30,7 +30,7 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   const pageSize = ref(4);
   
   // 日期格式化
-  const weekDays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+  const weekDays = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
   
   // 自動保存的定時器
   let autoSaveTimer: ReturnType<typeof setInterval>;
@@ -72,7 +72,8 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   // 獲取章節時間信息
   function getChapterTime(chapter: any) {
     return {
-      weekday: chapter.weekday !== undefined ? weekDays[chapter.weekday] : '未設置',
+      weekday: chapter.weekday !== undefined ? 
+        weekDays[(chapter.weekday % 7) - 1 >= 0 ? (chapter.weekday % 7) - 1 : 6] : '未設置',
       start: formatTime(chapter.startTime),
       end: formatTime(chapter.endTime)
     };
@@ -124,7 +125,7 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   // 檢查是否已報名
   async function checkEnrollment() {
     try {
-      const res = await axios.get(`/api/progress/check-enrollment/${currentCourseId.value}`, {
+      const res = await axios.get(`/api/enrollment/check/${currentCourseId.value}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       

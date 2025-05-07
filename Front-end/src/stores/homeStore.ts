@@ -71,9 +71,9 @@ export const useHomeStore = defineStore('home', () => {
     
     // 轉換回數組並排序
     return Array.from(courseMap.values()).sort((a, b) => {
-      // 首先按星期排序
-      const dayA = a.weekday !== undefined ? a.weekday : 7;
-      const dayB = b.weekday !== undefined ? b.weekday : 7;
+      // 首先按星期排序 - 使用嚴格比較
+      const dayA = a.weekday === undefined ? 8 : a.weekday;
+      const dayB = b.weekday === undefined ? 8 : b.weekday;
       if (dayA !== dayB) return dayA - dayB;
       
       // 如果星期相同，按時間排序
@@ -93,12 +93,11 @@ export const useHomeStore = defineStore('home', () => {
     return mergedCourseData.value.slice(start, end);
   });
   
-  // 修正: 轉換星期幾為文字 (確保從0開始匹配)
+  // 獲取星期名稱
   function getWeekdayName(day: number | undefined) {
     if (day === undefined) return '未指定';
-    // 修復週日顯示問題，根據後端返回值（0表示週日）
-    const weekdays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
-    return weekdays[day];
+    const weekdays = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
+    return weekdays[(day % 7) - 1 >= 0 ? (day % 7) - 1 : 6];
   }
   
   // 獲取待處理請求數
