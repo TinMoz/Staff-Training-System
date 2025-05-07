@@ -1,6 +1,6 @@
 ## 员工培训系统
 
-這是一個用於公司內部員工培訓的網頁應用系統。系統允許管理員創建培訓課程及處理員工報名課程事宜，員工亦可瀏覽系統內的課程及其章節並跟踪學習進度和查看個人時間表
+這是一個用於公司內部員工培訓的網頁應用系統。系統允許管理員創建培訓課程及處理員工報名課程事宜，員工亦可瀏覽系統內的課程及其章節並跟踪學習進度和查看個人時間表。
 
 ## 主要功能
 
@@ -12,19 +12,21 @@
 
 ## 技術
 
-- 前端: Vue框架 + ts
+本項目採用前後端分離開發並使用 MVC 開發模式
+
+### 前端: Vue框架 + ts
 
         --使用Pinia管理Store以及Router路由管理進行頁面跳轉
 
-        **使用element plus UI組件庫搭建前端UI畫面
+        --使用element plus UI組件庫搭建前端UI畫面
 
-        **使用 Axios 處理前後端通訊
+        --使用 Axios 處理前後端通訊
 
-        **JWT認證 用於為用戶進行身份驗證
+        --JWT認證 用於為用戶進行身份驗證
 
-- 後端: java spring
+### 後端: java spring
 
-        --使用Spring Boot框架進行開發, 並使用Spring Security控制API訪問並提供,
+        --使用Spring Boot作為核心框架進行開發, 並使用Spring Security控制API訪問並提供,
 
           同時使用Spring Data JPA實行行自動化數據庫訪問層實現
 
@@ -35,11 +37,11 @@
         --JWT令牌 進行用戶身份驗證與 Spring Security 集成的自定義認證過濾器
 
 
-- 數據: MySQL
+### 數據: MySQL
 
         --使用MySQL進行數據存儲供後端Hibernate ORM執行實際數據庫操作
 
-- 部署: Maven + Vite + Git
+### 部署: Maven + Vite + Git
 
         --Maven 進行後端建構與管理後端依賴的工具
 
@@ -96,3 +98,10 @@ application.properties設置數據庫:
     spring.datasource.password=你的MySQL密碼 需自行填寫
     spring.jpa.hibernate.ddl-auto=validate
     spring.jpa.show-sql=true
+
+## 演示帳戶
+
+系統預設了以下測試帳戶：
+
+- 管理員: admin / admin123
+- 一般用戶: test / test
