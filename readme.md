@@ -54,13 +54,13 @@
 
 要順利運行此項目 請先安裝下列必須環境變量及軟件
 
-JAVA JDK 17 https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+1.JAVA JDK 17 https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
 
-Maven 3.9.9 https://maven.apache.org/download.cgi
+2.Maven 3.9.9 https://maven.apache.org/download.cgi
 
-Node.js 16+ https://nodejs.org/en
+3.Node.js 16+ https://nodejs.org/en
 
-MySQL 8.0+ https://dev.mysql.com/downloads/installer/
+4.MySQL 8.0+ https://dev.mysql.com/downloads/installer/
 
 
 ## 安装步骤
