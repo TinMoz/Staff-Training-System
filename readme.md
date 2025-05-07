@@ -14,24 +14,25 @@
 
 - 前端: Vue框架 + ts
 
-        --使用Pinia管理Store以及Router路由管理進行頁面跳轉
+**使用Pinia管理Store以及Router路由管理進行頁面跳轉**
 
-        --使用element plus UI組件庫搭建前端UI畫面
+**使用element plus UI組件庫搭建前端UI畫面**
 
-        --使用 Axios 處理前後端通訊
+**使用 Axios 處理前後端通訊**
 
-        --JWT認證 用於為用戶進行身份驗證
+**JWT認證 用於為用戶進行身份驗證**
 
 - 後端: java spring
-        --使用Spring Boot框架進行開發, 並使用Spring Security控制API訪問並提供,
 
-            同時使用Spring Data JPA實行行自動化數據庫訪問層實現
+**使用Spring Boot框架進行開發, 並使用Spring Security控制API訪問並提供,**
 
-        --Hibernate Orm進行Java和數據庫表的對象映射,實現JPA功能生成並執行SQL語句
+**同時使用Spring Data JPA實行行自動化數據庫訪問層實現**
 
-        --使用BCrypt進行密碼加密
+**Hibernate Orm進行Java和數據庫表的對象映射,實現JPA功能生成並執行SQL語句**
 
-        --JWT令牌 進行用戶身份驗證與 Spring Security 集成的自定義認證過濾器
+**使用BCrypt進行密碼加密**
+
+**JWT令牌 進行用戶身份驗證與 Spring Security 集成的自定義認證過濾器**
 
 
 - 數據: MySQL
