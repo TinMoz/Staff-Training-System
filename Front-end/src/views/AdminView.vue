@@ -66,7 +66,7 @@ const rejectRequest = (id: number) => adminStore.processRequest(id, 'rejected');
     <div class="admin-view">
       <h1>管理員頁面</h1>
       <!--添加課程按鈕-->
-      <el-button type="primary" @click="handleAddCourse">
+      <el-button type="primary" class="add-class" @click="handleAddCourse">
         添加課程
       </el-button>
       <!--課程表格-->
