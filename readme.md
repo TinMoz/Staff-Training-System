@@ -63,7 +63,7 @@
 4.MySQL 8.0+ https://dev.mysql.com/downloads/installer/
 
 
-## 安装步骤
+## 本地運行步骤
 
 安裝並配置好環境變量後完成以下步驟即可使用
 
@@ -73,19 +73,21 @@
 
 3.在後端/Back-end/src/main/下方添加resources文件夾並新增application.properties以設置數據庫
 
-4.打開新的cmd 進入項目的後端部分 'cd /your path/Staff_Training_System/Back-end'
+4.在前端/Front-end/src/utils/request下配置你的後端地址 如http://localhost:8080
 
-5.輸入 'mvn clean install' 後耐心等待
+5.打開新的cmd 進入項目的後端部分 'cd /your path/Staff_Training_System/Back-end'
 
-6.輸入 'mvn spring-boot:run' 以運行後端項目
+6.輸入 'mvn clean install' 後耐心等待
 
-7.打開新的cmd 進入項目的前端部分 'cd /your path/Staff_Training_System/Front-end'
+7.輸入 'mvn spring-boot:run' 以運行後端項目
 
-8.輸入 'npm install' 以安裝前端依賴包
+8.打開新的cmd 進入項目的前端部分 'cd /your path/Staff_Training_System/Front-end'
 
-9.輸入 'npm run dev' 以運行前端項目
+9.輸入 'npm install' 以安裝前端依賴包
 
-10.在前端項目輸入 'o + enter' 開啟網頁
+10.輸入 'npm run dev' 以運行前端項目
+
+11.在前端項目輸入 'o + enter' 開啟網頁
 
 ## 配置说明
 
