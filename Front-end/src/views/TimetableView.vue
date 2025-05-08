@@ -57,8 +57,19 @@ const formattedData = computed(() => {
 
 //解析時間字符串為小時和分鐘
 const parseTime = (time: string) => {
-  const [hours, minutes] = time.split(':').map(Number)
+  const timeParts = time.split(':');
+  const hours = parseInt(timeParts[0]);
+  const minutes = parseInt(timeParts[1]);
   return { hours, minutes }
+}
+
+const formatTime = (time: string): string => {
+  // 如果時間包含秒數，只保留小時和分鐘
+  if (time && time.includes(':')) {
+    const parts = time.split(':');
+    return `${parts[0]}:${parts[1]}`;
+  }
+  return time;
 }
 
 //計算課程塊樣式
@@ -147,7 +158,7 @@ onMounted(() => {
                 <div class="course-content">
                   {{ item.courseTitle }}<br>
                   {{ item.chapterTitle }}<br>
-                  {{ item.startTime }}-{{ item.endTime }}
+                  {{ formatTime(item.startTime) }}-{{ formatTime(item.endTime) }}
                 </div>
               </div>
             </div>

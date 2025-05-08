@@ -15,7 +15,7 @@ const routeKey = computed(() => `${route.fullPath}`)//使用路由的完整路�
 //登出後返回登錄頁面
 const handleLogout = () => {
   userStore.logout()
-  router.push('/login') 
+  router.push('/home') 
 }
 </script>
 
@@ -48,9 +48,11 @@ const handleLogout = () => {
     <!--主內容區域-->
     <el-main>
     <div class="content-container">
-      <transition name="fade-in" mode="out-in">
-        <router-view :key="routeKey" />
+      <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" :key="routeKey" />
       </transition>
+    </router-view>
     </div>
     ​</el-main>
   </el-container>

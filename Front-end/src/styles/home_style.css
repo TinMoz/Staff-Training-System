@@ -1,154 +1,123 @@
-.home-view {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    position: relative;
-  }
-  .page-container.user-home {
-    margin-top: 280px;
-    min-height: 120vh;
-    transition: margin-top 0.3s ease;
-  }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-    margin-top: 10px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .stat-card {
-    transition: transform 0.3s ease;
-  }
-  
-  .stat-card:hover {
-    transform: translateY(-3px);
-  }
-  
-  .stat-content {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 12px;
-  }
-  
-  .stat-icon {
-    font-size: 32px;
-    padding: 12px;
-    border-radius: 8px;
-    background: #f5f7fa;
-  }
-  
-  .stat-label {
-    color: #666;
-    font-size: 14px;
-  }
-  
-  .stat-value {
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 4px;
-  }
-  
-  .quick-actions {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    margin: 24px 0;
-  }
-  
-  .section-card {
-    margin-top: 20px;
-  }
-  
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-  }
-  
-  .recent-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .recent-item:last-child {
-    border-bottom: none;
-  }
-  
-  .course-info {
-    flex: 1;
-    margin-right: 20px;
-  }
-  
-  .course-title {
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-  
-  .timetable-item {
-    display: flex;
-    gap: 20px;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .time-info {
-    text-align: center;
-    min-width: 100px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .weekday {
-    font-weight: 600;
-    color: #409eff;
-    margin-bottom: 4px;
-  }
-  
-  .time-range {
-    font-size: 13px;
-    color: #606266;
-  }
-  
-  .course-details {
-    flex: 1;
-  }
-  
-  .chapter {
-    font-size: 12px;
-    color: #666;
-    margin-top: 4px;
-  }
-  
-  .empty-tip {
-    text-align: center;
-    color: #999;
-    padding: 20px;
-  }
+/*統計卡片*/
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
 
-  .login-prompt {
-    text-align: center;
-    padding: 40px;
-  }
-  .login-prompt h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #1f2937;
-  }
-  .login-prompt p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 30px;
-  }
+.stat-card {
+  border-radius: 10px;
+}
 
-  .page-container .el-button:hover{
-    color: #fff !important;
-  }
+.stat-card:hover {
+  transition: transform 0.3s ease;
+  transform: translateY(-5px);
+}
+
+.stat-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  font-size: 32px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f5f7fa;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 14px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/*按鈕區域*/
+.quick-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+/*學習進度區域*/
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.course-title {
+  font-weight: 600;
+  color:#393841;
+}
+/*顯示時間*/
+.timetable-item {
+  display: flex;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.time-info {
+  text-align: center;
+}
+
+.weekday {
+  font-weight: 600;
+  color: #409eff;
+  margin-bottom: 4px;
+}
+
+.time-range {
+  font-size: 13px;
+  color: #606266;
+}
+/*顯示課程*/
+.course-details {
+  flex: 1;
+}
+
+.chapter {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+/*翻頁組件*/
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+
+}
+/*暫無課程*/
+.empty-tip {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+/*非用戶區域*/
+.login-prompt {
+  text-align: center;
+  padding: 40px;
+}
+.login-prompt h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+.login-prompt p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+
 

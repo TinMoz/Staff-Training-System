@@ -21,30 +21,49 @@ const userRoleLabel = computed(() => {
 
 // 處理登錄請求
 const handleLogin = async () => {
+  // 先進行表單驗證
+  if (!username.value) {
+    errorMessage.value = '請填入你的用戶名';
+    return;
+  }
+  
+  if (!password.value) {
+    errorMessage.value = '請填入你的密碼';
+    return;
+  }
+
   try {
-    const response = await axios.post('/api/auth/login', { // 透過axios發送帶著用戶名和密碼的登錄請求的api
+    const response = await axios.post('/api/auth/login', {
       username: username.value,
       password: password.value
     });
 
-    const { token, role, username: resUsername } = response.data; // 獲取響應數據中的token、角色和用戶名
+    const { token, role, username: resUsername } = response.data;
     localStorage.setItem('token', token);
     userStore.token = token;
-    userStore.role = role.toUpperCase(); // 確保轉換為大寫
+    userStore.role = role.toUpperCase();
     userStore.username = resUsername;
     userStore.isAuthenticated = true;
 
     // 強制重新初始化以同步數據
     await userStore.initialize();
-
+    
+    errorMessage.value = '';
     loginSuccess.value = true;
     setTimeout(() => {
       router.push('/home');
-    }, 2000);
+    }, 1500);
 
   } catch (error: any) {
     console.error('登錄失敗:', error);
-    errorMessage.value = '登錄失敗: ' + (error.response?.data || '用戶名或密碼錯誤');
+    // 改進錯誤訊息處理
+    if (error.response?.data) {
+      errorMessage.value = typeof error.response.data === 'string' 
+        ? `登錄失敗: ${error.response.data}` 
+        : '登錄失敗: 用戶名或密碼錯誤';
+    } else {
+      errorMessage.value = '登錄失敗: 網絡連接錯誤';
+    }
   }
 };
 </script>
@@ -55,7 +74,8 @@ const handleLogin = async () => {
     <div class="auth-container login">
       <h1>登錄</h1>
       <!--登錄成功提示-->
-      <div v-if="loginSuccess" class="success-message">
+      <div v-if="loginSuccess" class="success-box">
+        <el-icon class="success-icon"><Select /></el-icon>
         <p>歡迎 {{ userStore.username }}！</p>
         <p>您的權限級別：{{ userRoleLabel }}</p>
         <p>🎉 登錄成功！</p>
@@ -75,15 +95,6 @@ const handleLogin = async () => {
           placeholder="密碼"
           class="input-item"
         />
-        <!--登錄成功動效框-->
-        <div v-if="loginSuccess" class="success-box">
-          <div class="success-content">
-            <el-icon class="success-icon"><Select /></el-icon>
-            <h3>🎉 歡迎 {{ userStore.username }}！</h3>
-            <p>您的權限等級：<span class="role-tag">{{ userRoleLabel }}</span></p>
-            <p>即將跳轉到首頁...</p>
-          </div>
-        </div>
         <!--登錄按鈕-->
         <el-button type="primary" native-type="submit" class="auth-button">登錄</el-button>
         <!--註冊跳轉區域-->

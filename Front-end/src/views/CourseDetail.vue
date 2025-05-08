@@ -29,8 +29,6 @@ onUnmounted(() => {
 
 <template>
   <div class="page-container course-detail-page">
-    <!--課程詳情頁面容器-->
-    <div class="course-detail" v-loading="courseDetailStore.loading">
       <!--課程頭部信息區域-->
       <div class="course-header">
         <!--課程標題區域-->
@@ -38,9 +36,9 @@ onUnmounted(() => {
           <h1>{{ courseStore.detail?.title }}</h1>
           <div class="course-code">{{ courseStore.detail?.courseCode }}</div>
         </div>
-        <!--操作按鈕區域-->
+        <!--報名按鈕區域-->
         <div class="actions">
-          <!--報名操作區域-->
+          <!--回到課程列表按鈕操作區域-->
           <div class="enrollment-action">
             <!--報名按鈕，僅對未報名的普通用戶顯示-->
             <el-button 
@@ -117,7 +115,7 @@ onUnmounted(() => {
         <p>{{ courseStore.detail?.description }}</p>
       </div>
       
-      <!--課程內容區域-->
+      <!--章節內容區域-->
       <div class="course-content">
         <h3>課程內容</h3>
         <!--可折疊的章節列表-->
@@ -193,23 +191,8 @@ onUnmounted(() => {
         </el-button>
       </div>
     </div>
-  </div>
 </template>
 
 <style src="../styles/coursedetail_style.css"></style>
 
-<style scoped>
-.enrollment-action {
-  display: flex;
-  flex-direction: column;
-}
 
-.enrollment-warning {
-  width: 100%;
-  margin-top: 10px;
-}
-
-.enrollment-warning .el-alert {
-  margin: 0;
-}
-</style>

@@ -1,53 +1,9 @@
-.admin-view {
-  display: flex;
-  flex-direction: column;
-}
 
-@keyframes modalIn {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
-/* 表單元素動畫 */
-@keyframes formItemIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* 章節項動畫 */
-.chapter-enter-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.chapter-enter-from {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-.chapter-leave-active {
-  transition: all 0.2s;
-}
-.chapter-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
+/* 彈窗樣式 */
 .course-dialog {
-  border-radius: 12px !important;
-  background: linear-gradient(145deg, #f8fafc, #f1f5f9) !important;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
-             0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
-  animation: modalIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #f8fafc, #f1f5f9);
 }
 
 .course-dialog .el-dialog__header {
@@ -58,35 +14,20 @@
 }
 
 .course-dialog .el-dialog__title {
-  color: white !important;
+  color: white;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
-
-.course-dialog .el-dialog__headerbtn {
-  top: 18px;
-  right: 24px;
-}
-/* 表單元素樣式 */
-.el-form-item {
-  animation: formItemIn 0.4s ease-out forwards;
-  opacity: 0;
-}
-
-.el-form-item:nth-child(1) { animation-delay: 0.1s; }
-.el-form-item:nth-child(2) { animation-delay: 0.2s; }
-.el-form-item:nth-child(3) { animation-delay: 0.3s; }
-.el-form-item:nth-child(4) { animation-delay: 0.4s; }
-.el-form-item:nth-child(5) { animation-delay: 0.5s; }
-
+/* 彈窗章節內容區域 */
 .chapter-item {
   position: relative;
   padding: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 15px !important;
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  width: 90%;
+  box-sizing: border-box;
 }
 
 .chapter-item:hover {
@@ -94,51 +35,13 @@
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
-.add-chapter-btn::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 0;
-  background: rgba(99, 102, 241, 0.1);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s;
-}
-
-.add-chapter-btn:hover::after {
-  width: 120px;
-  height: 120px;
-}
-.page-container .el-button:hover{
-  color: #fff !important;
-}
-
-
-
 /* 保存按鈕特效 */
 .save-btn {
   position: relative;
-  overflow: hidden;
-  background: linear-gradient(45deg, #3b82f6, #6366f1) !important;
-  color: white !important;  /* Changed from font-color to color */
-  border: none !important;
-  transition: all 0.3s ease !important;
-}
-
-.save-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.3),
-    transparent
-  );
-  transition: left 0.6s;
+  background: linear-gradient(45deg, #3b82f6, #6366f1);
+  color: white; 
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .save-btn:hover {
@@ -146,28 +49,24 @@
   transform: translateY(-2px);
 }
 
-.el-input__wrapper {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
 
 /* 取消按鈕特效 - 紅色漸變樣式 */
 .cancel-btn {
-  background: linear-gradient(45deg, #f56c6c, #eb5757);
+  background: linear-gradient(45deg, #ff2f2f, #c43333);
   color: white !important;
   border: none !important;
-
+  font-weight: 600;
 }
 .cancel-btn:hover {
   box-shadow: 0 4px 12px rgba(245, 108, 108, 0.4);
   transform: translateY(-2px);
+  transition: all 0.3s ease;
 }
 
-
+/* 刪除按鈕特效 */
 .remove-btn:hover {
   transform: translateY(-2px);
 }
-
-
 
 /* 確保操作按鈕有足夠的容器空間 */
 .el-table__row .el-button {

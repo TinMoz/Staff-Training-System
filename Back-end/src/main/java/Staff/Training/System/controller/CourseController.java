@@ -1,6 +1,7 @@
 package staff.training.system.controller;
 
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import org.springframework.security.core.Authentication;
@@ -92,22 +93,58 @@ public class CourseController {
         course.setCredits(request.getCredits()); // 透過Json的學分設置課程學分 
         course.setCreatedBy(creator); // 設置創建者
         course.setTeacher(request.getTeacher());  // 透過Json的教師名字設置課程教師名字
-        course.setChapters(request.getChapters().stream() // 透過Stream 將ChapterDTO轉換為Chapter實體
-            .map(dto -> {
-                Chapter ch = new Chapter();
-                ch.setCourse(course); // 設置課程ID
-                ch.setTitle(dto.getTitle()); // 透過Json的章節名字設置課程章節名字
-                ch.setContent(dto.getContent()); // 透過Json的章節內容設置課程章節內容
-                ch.setOrderNum(dto.getOrderNum()); // 透過Json的章節順序設置課程章節順序
-                ch.setDuration(dto.getDuration()); // 透過Json的章節時長設置課程章節時長
-                
-                return ch;    
-            }).toList()
-        );
-    
+
+        List<Chapter> chapters = new ArrayList<>(); // 創建一個空的章節列表
+        int chapterIndex = 0;
+        for (CourseCreateRequest.ChapterDTO dto : request.getChapters()) { // 遍歷請求中的章節列表
+            Chapter ch = new Chapter(); // 創建新的Chapter實體
+            ch.setTitle(dto.getTitle()); // 透過Json的章節名字設置課程章節名字
+            ch.setContent(dto.getContent()); // 透過Json的章節內容設置課程章節內容
+            ch.setOrderNum(dto.getOrderNum()); // 透過Json的章節順序設置課程章節順序
+            ch.setDuration(dto.getDuration()); // 透過Json的章節時長設置課程章節時長
+            ch.setCourse(course); // 設置課程ID
+
+            int weekday = (int) (Math.random() * 5) + 1;
+            ch.setWeekday(weekday);
+
+            assignTimeBasedOnDuration(ch, chapterIndex);
+            chapters.add(ch); // 將章節添加到列表中
+            chapterIndex++;
+        }
+        course.setChapters(chapters);
         return ResponseEntity.ok(courseRepository.save(course));
     }
-
+    // 根據章節時長和索引分配時間
+    private void assignTimeBasedOnDuration(Chapter chapter, int index) {
+        // 基礎開始時間：9:00、13:30、16:00、18:30
+        String[] baseStartTimes = {"09:00:00", "13:30:00", "16:00:00", "18:30:00"};
+        
+        // 根據章節索引選擇一個基礎時間
+        int timeSlotIndex = index % baseStartTimes.length;
+        String startTime = baseStartTimes[timeSlotIndex];
+        
+        // 解析開始時間
+        int hour = Integer.parseInt(startTime.substring(0, 2));
+        int minute = Integer.parseInt(startTime.substring(3, 5));
+        
+        // 計算結束時間 (基於章節時長，以分鐘為單位)
+        int duration = chapter.getDuration() != null ? chapter.getDuration() : 120; // 默認2小時
+        int endHour = hour + duration / 60;
+        int endMinute = minute + duration % 60;
+        
+        // 處理分鐘進位
+        if (endMinute >= 60) {
+            endHour += 1;
+            endMinute -= 60;
+        }
+        
+        // 格式化結束時間
+        String endTime = String.format("%02d:%02d:00", endHour, endMinute);
+        
+        // 設置章節的開始和結束時間
+        chapter.setStartTime(startTime);
+        chapter.setEndTime(endTime);
+    }
     // 更新課程信息
     @PutMapping("/{id}") //處理Put請求
     @PreAuthorize("hasRole('ADMIN')") // 只有Admin權限的用戶可以訪問
@@ -141,7 +178,7 @@ public class CourseController {
     }
 
 
-
+    // 用於接收前端傳來的課程創建請求的DTO
     @Data
     public static class CourseCreateRequest {
         private String title;
@@ -149,9 +186,9 @@ public class CourseController {
         private String description;
         private int credits;
         private List<ChapterDTO> chapters;
-        private String teacher; // 新增 teacher 字段
+        private String teacher; 
 
-    
+        // 用於接收前端傳來的章節創建請求的DTO
         @Data
         public static class ChapterDTO {
             private String title;

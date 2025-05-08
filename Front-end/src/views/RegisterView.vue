@@ -141,7 +141,7 @@ const handleRegister = async () => {
       <h1>創建新賬號</h1>
       
       <!--註冊成功提示區-->
-      <div v-if="registerSuccess" class="success-message">
+      <div v-if="registerSuccess" class="success-box">
           <el-icon class="success-icon"><CircleCheck /></el-icon>
           <h3>🎉 註冊成功！</h3>
           <p>歡迎 {{ form.username }}</p>
@@ -188,14 +188,12 @@ const handleRegister = async () => {
         </div>
         
         <!--表單操作區-->
-        <div class="form-actions">
           <el-button 
             type="primary" 
             native-type="submit" 
             class="auth-button"
-            :disabled="!!usernameError || !!passwordError || !!emailError"
           >註冊</el-button>
-        </div>
+
         
         <!--登錄跳轉-->
         <div class="auth-link">
@@ -205,12 +203,7 @@ const handleRegister = async () => {
       
       <!--錯誤提示區-->
       <div v-if="errorMessage" class="error-message">
-        <el-alert
-          :title="errorMessage"
-          type="error"
-          :closable="false"
-          show-icon
-        />
+        {{ errorMessage }}
       </div>
     </div>
   </div>

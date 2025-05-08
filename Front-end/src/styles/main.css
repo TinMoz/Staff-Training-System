@@ -1,20 +1,36 @@
+/*全局樣式*/
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  min-height: 100%;
 }
 
-/* 修改原来的链接样式选择器，排除 .no-hover 类 */
+body, html {
+  background: linear-gradient(135deg, #f3f4f6, #e0f7fa);
+}
+
+/*全局鏈結*/
 a:not(.no-hover),
 .green {
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
   padding: 3px;
+  position: relative
+}
+
+a:not(.no-hover)::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: hsla(160, 100%, 37%, 1);
+  transition: width 0.3s ease;
+}
+
+a:not(.no-hover):hover::after{
+  width: 100%;
 }
 
 @media (hover: hover) {
@@ -22,31 +38,7 @@ a:not(.no-hover),
     background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-}
-
-/* 全局样式 */
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f3f4f6, #e0f7fa);
-  color: #333;
-}
-
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-
-
+/*頂欄*/
 .nav-container {
   position: fixed;
   top: 0;
@@ -93,50 +85,40 @@ body, html {
 }
 
 .nav-container a:hover::after {
-  width: calc(100% - 32px); 
+  width: calc(100% - 2rem); 
   left: 16px; 
 }
 
-/* 内容滚动容器 - 处理过长内容 */
+/*全局內容區域*/
 .content-container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: auto;
   padding: 0 20px;
   box-sizing: border-box;
 }
-
-/* 页面容器 - 统一的顶部边距 */
+/*內容頁面*/
 .page-container {
-  flex: 1;
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
-  margin-top: 80px; 
+  margin: 5%; 
   padding: 30px;
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  min-width: 800px;
-  position: relative;
-  z-index: 1;
-  box-sizing: border-box; 
+
 }
 
 .page-container:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
-/* 标题样式 */
+/*全局標題*/
 h1, h2 {
-  margin-bottom: 20px;
   color: #1f2937;
-  text-align: left;
-  font-weight: 700;
-  letter-spacing: 1px;
 }
 
-/* 表格样式 */
+/*全局表格*/
 .el-table {
   border-radius: 12px;
   overflow: hidden;
@@ -149,30 +131,26 @@ h1, h2 {
   font-weight: 600;
   text-align: center;
 }
-.page-container .el-button:hover{
-  color: #fff !important;
-}
-
 
 .el-table th {
   color: #525252;
 }
 
-.el-table td {
-  text-align: center;
-  padding: 12px;
+/*全局el按鈕*/
+.page-container .el-button:hover{
+  color: #fff !important;
 }
-
 .page-container .el-button{
   border-radius: 8px;
   font-weight: 600;
   position: relative;
-  border: none !important;
+  border: none;
   background-color: transparent !important;
-  color: #333 !important;
+  color: #333;
   overflow: hidden;
   transition: color 0.4s ease;
   z-index: 1;
+  padding: 10px;
 }
 
 .page-container .el-button::before {
@@ -188,7 +166,7 @@ h1, h2 {
 }
 
 .page-container .el-button:hover{
-  color: #fff !important;
+  color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -197,22 +175,15 @@ h1, h2 {
   left: 0;
 }
 
-
 .page-container .el-button--primary:not(.auth-button){
-  border-color: #409eff !important;
-  color: #409eff !important;
-  text-align: center;
+  color: #409eff;
 }
 
 .page-container .el-button--primary::before{
   background-color: #409eff;
 }
 
-
-
-
 .page-container .el-button--success{
-  border-color: #67c23a !important;
   color: #67c23a !important;
 }
 
@@ -221,7 +192,6 @@ h1, h2 {
 }
 
 .page-container .el-button--danger{
-  border-color: #f56c6c !important;
   color: #f56c6c !important;
 }
 
@@ -230,7 +200,6 @@ h1, h2 {
 }
 
 .page-container .el-button--warning{
-  border-color: #e6a23c !important;
   color: #e6a23c !important;
 }
 
@@ -238,23 +207,9 @@ h1, h2 {
   background-color: #e6a23c;
 }
 
-.el-dialog__body {
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-
-.user-info {
-  display: flex;
-}
 .logout-btn {
-  background-color: white !important;
   border: 1px solid #333 !important;
   color: #333 !important;
-  border-radius: 6px !important;
-  padding: 8px 16px !important;
-  font-weight: 500 !important;
-  transition: all 0.3s ease !important;
 }
 
 .logout-btn:hover {
@@ -262,35 +217,6 @@ h1, h2 {
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
-
-.el-table__body tr:nth-child(even){
-  background-color: #eef1f7 !important;
-}
-
-.el-table__body tr:hover {
-  background-color: #ecf5ff !important;
-}
-
-/* 页面过渡动画 - 淡入效果 */
-.fade-in-enter-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-in-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-in-enter-from,
-.fade-in-leave-to {
-  opacity: 0;
-}
-
-.fade-in-enter-to,
-.fade-in-leave-from {
-  opacity: 1;
-}
-
 
 
 

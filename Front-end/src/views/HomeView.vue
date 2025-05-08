@@ -117,7 +117,7 @@ onMounted(() => {
         </div>
 
         <!--學習進度卡片-->
-        <el-card v-if="userStore.role !== 'ADMIN'" class="section-card">
+        <el-card v-if="userStore.role !== 'ADMIN'">
           <template #header>
             <div class="card-header">
               <el-icon><AlarmClock /></el-icon>
