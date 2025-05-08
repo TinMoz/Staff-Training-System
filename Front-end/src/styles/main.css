@@ -1,9 +1,4 @@
 /*全局樣式*/
-#app {
-  flex: 1;
-  min-height: 100%;
-}
-
 body, html {
   background: linear-gradient(135deg, #f3f4f6, #e0f7fa);
 }
@@ -89,14 +84,14 @@ a:not(.no-hover):hover {
 
 /*全局內容區域*/
 .content-container {
-  margin: 5%;
+  margin: auto;
   width: 100%;
   max-width: 1200px;
   box-sizing: border-box;
 }
 /*內容頁面*/
 .page-container {
-  margin: 0 250px 0 200px;
+  margin: 5% auto;
   width: 100%;
   max-width: 1000px;
   padding: 30px;
