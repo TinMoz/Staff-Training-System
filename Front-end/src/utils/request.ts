@@ -19,6 +19,12 @@ service.interceptors.request.use(
       return config;
     },
     (error) => {
+      console.error('API 錯誤詳情:', {
+        url: error.config?.url,
+        method: error.config?.method,
+        status: error.response?.status,
+        data: error.response?.data
+      });
       return Promise.reject(error); //如果請求失敗，則返回錯誤
     }
   );
