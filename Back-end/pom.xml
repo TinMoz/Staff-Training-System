@@ -131,7 +131,7 @@
 				<version>3.3.1</version>
 				<configuration>
 				<to>
-				<image>gcr.io/${GCP_PROJECT_ID}/your-service-name</image>
+				<image>gcr.io/seismic-sweep-459010-a5/staff-training-system</image>
 				</to>
 			</configuration>
 			</plugin>
