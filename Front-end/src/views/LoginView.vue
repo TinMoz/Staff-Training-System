@@ -2,9 +2,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useUserStore } from '../stores/userStore'
-import axios from '../utils/request';
 import router from '../router';
 import { Select } from '@element-plus/icons-vue'
+import service from '../utils/request';
 
 // 使用用戶Store
 const userStore = useUserStore()
@@ -33,7 +33,7 @@ const handleLogin = async () => {
   }
 
   try {
-    const response = await axios.post('/api/auth/login', {
+    const response = await service.post('/api/auth/login', {
       username: username.value,
       password: password.value
     });

@@ -1,10 +1,10 @@
 <!--RegisterView.vue-->
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import axios from '../utils/request';
 import { useRouter } from 'vue-router';
 import { CircleCheck } from '@element-plus/icons-vue';
 import { debounce } from 'lodash'; // 需要安裝: npm install lodash
+import service from '../utils/request';
 
 const router = useRouter();
 const form = ref({
@@ -34,7 +34,7 @@ const checkUsernameExists = debounce(async () => {
   }
   try {
     checkingUsername.value = true;
-    const response = await axios.get(`/api/auth/check-username/${form.value.username}`); // 透過axios獲取用戶名是否存在的api
+    const response = await service.get(`/api/auth/check-username/${form.value.username}`); // 透過axios獲取用戶名是否存在的api
     if (response.data.exists) {
       usernameError.value = '用戶名已被註冊';
     }
@@ -118,7 +118,7 @@ const validateAndRegister = async () => {
 // 處理註冊邏輯
 const handleRegister = async () => {
   try {
-    await axios.post('/api/auth/register', form.value);
+    await service.post('/api/auth/register', form.value);
     
     // 顯示成功提示框
     registerSuccess.value = true;

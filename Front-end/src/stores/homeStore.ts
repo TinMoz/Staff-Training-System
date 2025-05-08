@@ -1,9 +1,9 @@
 //homeStore.ts
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import axios from '../utils/request';
 import { useUserStore } from './userStore';
 import { useCourseStore } from './courseStore';
+import service from '../utils/request';
 // 輸出 HomeStore 到 Vue 組件
 // 此Store主要用於定義首頁的狀態和行為
 export const useHomeStore = defineStore('home', () => {
@@ -103,7 +103,7 @@ export const useHomeStore = defineStore('home', () => {
   // 獲取待處理請求數
   async function fetchPendingRequests() {
     try {
-      const res = await axios.get('/api/enrollment/pending', {
+      const res = await service.get('/api/enrollment/pending', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       pendingRequests.value = res.data.length;
@@ -117,7 +117,7 @@ export const useHomeStore = defineStore('home', () => {
   async function fetchRecentCourses() {
     if (userStore.role !== 'ADMIN') { // 普通用戶才獲取
       try {
-        const res = await axios.get('/api/progress/courses', {
+        const res = await service.get('/api/progress/courses', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         recentCourses.value = res.data;
@@ -130,7 +130,7 @@ export const useHomeStore = defineStore('home', () => {
   // 獲取時間表
   async function fetchTimetable() {
     try {
-      const res = await axios.get('/api/progress/timetable?limit=5', { // 增加顯示數量
+      const res = await service.get('/api/progress/timetable?limit=5', { // 增加顯示數量
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       timetable.value = res.data;
@@ -150,7 +150,7 @@ export const useHomeStore = defineStore('home', () => {
         ? '/api/progress/admin-stats' // 管理員的統計信息
         : '/api/progress/stats'; // 普通用戶的統計信息
   
-      const res = await axios.get(url, {
+      const res = await service.get(url, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // 根據用戶角色權限顯示不同內容

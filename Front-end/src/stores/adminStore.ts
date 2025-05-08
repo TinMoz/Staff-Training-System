@@ -1,7 +1,7 @@
 //adminStore.ts
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import axios from '../utils/request';
+import service from '../utils/request';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { useCourseStore } from './courseStore';
 
@@ -178,7 +178,7 @@ export const useAdminStore = defineStore('admin', () => {
   // 獲取待處理請求
   async function fetchPendingRequests() {
     try {
-      const res = await axios.get('/api/enrollment/pending');
+      const res = await service.get('/api/enrollment/pending');
       pendingRequests.value = res.data;
     } catch (error) {
       console.error('獲取待處理請求失敗:', error);
@@ -188,7 +188,7 @@ export const useAdminStore = defineStore('admin', () => {
   // 處理請求
   async function processRequest(id: number, status: string) {
     try {
-      await axios.put(`/api/enrollment/${id}/${status}`);
+      await service.put(`/api/enrollment/${id}/${status}`);
       pendingRequests.value = pendingRequests.value.filter(r => r.id !== id);
       ElMessage.success('操作成功');
     } catch (error) {

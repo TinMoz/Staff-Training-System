@@ -1,7 +1,7 @@
 //coursedetailStore.ts
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import axios from '../utils/request';
+import service from '../utils/request';
 import { useCourseStore } from './courseStore';
 import { useUserStore } from './userStore';
 import { ElMessage } from 'element-plus';
@@ -104,7 +104,7 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   // 保存進度
   async function saveProgress() {
     try {
-      await axios.post('/api/course/progress', {
+      await service.post('/api/course/progress', {
         courseId: currentCourseId.value,
         progress: currentProgress.value
       });
@@ -125,7 +125,7 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   // 檢查是否已報名
   async function checkEnrollment() {
     try {
-      const res = await axios.get(`/api/enrollment/check/${currentCourseId.value}`, {
+      const res = await service.get(`/api/enrollment/check/${currentCourseId.value}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       
@@ -183,7 +183,7 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
         return;
       }
       
-      await axios.post(`/api/enrollment/${currentCourseId.value}`, null, {
+      await service.post(`/api/enrollment/${currentCourseId.value}`, null, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       
