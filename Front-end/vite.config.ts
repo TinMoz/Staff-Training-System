@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:8080", // 后端Spring Boot端口
+        target: "https://staff-training-system-744605943289.us-central1.run.app", // 後端端口
         changeOrigin: true,
       },
     },

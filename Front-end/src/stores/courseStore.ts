@@ -1,6 +1,7 @@
 //courseStore.ts
 import {defineStore} from 'pinia';
 import axios from 'axios';
+import service from '../utils/request';
 //定義課程的接口
 interface Course {
     id: string;
@@ -39,7 +40,7 @@ export const useCourseStore = defineStore('course', {
             if (!force && Date.now() - this.lastFetch < 10_000) return
             
             try {
-              const res = await axios.get('/api/courses') // res 利用 axios 發送請求獲得後端發送的courses裡面的內容
+              const res = await service.get('/api/courses') // res 利用 axios 發送請求獲得後端發送的courses裡面的內容
               this.courses = res.data;
               this.lastFetch = Date.now() // 記錄成功請求時間
             } catch (err) {
@@ -50,7 +51,7 @@ export const useCourseStore = defineStore('course', {
         // 刪除課程
         async deleteCourse(id: string) {
           try {
-            await axios.delete(`/api/admin/courses/${id}`, { // 利用 axios 發送請求刪除課程，用id指定具體課程
+            await service.delete(`/api/admin/courses/${id}`, { // 利用 axios 發送請求刪除課程，用id指定具體課程
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}` // 發送API請求時帶上用戶token
               }
@@ -68,7 +69,7 @@ export const useCourseStore = defineStore('course', {
               orderNum: index + 1
             }));
         
-            const response = await axios.put(`/api/courses/${course.id}`, {// 利用 axios 發送請求更新課程，用id指定具體課程
+            const response = await service.put(`/api/courses/${course.id}`, {// 利用 axios 發送請求更新課程，用id指定具體課程
               id: course.id,
               title: course.title,
               courseCode: course.courseCode,
@@ -99,7 +100,7 @@ export const useCourseStore = defineStore('course', {
             orderNum: index + 1 
           }));
         
-          const response = await axios.post('/api/courses', { // 利用 axios 發送請求創建課程
+          const response = await service.post('/api/courses', { // 利用 axios 發送請求創建課程
             title: course.title,
             courseCode: course.courseCode,
             description: course.description,
@@ -119,7 +120,7 @@ export const useCourseStore = defineStore('course', {
         async fetchCourseDetail(courseId: string) {
             try {
                 console.log('請求路徑:', `/api/courses/${courseId}`); 
-                const res = await axios.get(`/api/courses/${courseId}`);// 利用 axios 發送請求獲得課程詳情
+                const res = await service.get(`/api/courses/${courseId}`);// 利用 axios 發送請求獲得課程詳情
                 console.log('響應數據:', res.data);
                 this.detail = res.data; // 將響應數據賦值給 detail
             } catch (err) {
