@@ -9,19 +9,15 @@ COPY ./Back-end/.mvn ./.mvn
 COPY ./Back-end/mvnw ./mvnw
 COPY ./Back-end/mvnw.cmd ./mvnw.cmd
 
-# 構建
-RUN chmod +x ./mvnw && ./mvnw clean package -DskipTests
+# 構建應用程式
+RUN mvn clean package -DskipTests
 
-# 運行
+# 運行階段
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-# 複製Jar
+
+# 從構建階段複製 JAR 文件
 COPY --from=build /app/target/*.jar app.jar
 
-# 添加啟動
-RUN echo '#!/bin/sh\n\
-java ${JAVA_OPTS} -jar app.jar ${0} ${@}' > ./entrypoint.sh && \
-chmod +x ./entrypoint.sh
-
-EXPOSE 8080
-ENTRYPOINT ["./entrypoint.sh"]
+# 運行應用程式
+CMD ["java", "-Dserver.port=${PORT:-8080}", "-jar", "app.jar"]
