@@ -21,6 +21,7 @@ service.interceptors.request.use(
     (error) => {
       console.error('API 錯誤詳情:', {
         url: error.config?.url,
+        baseURL: error.config?.baseURL,
         method: error.config?.method,
         status: error.response?.status,
         data: error.response?.data
