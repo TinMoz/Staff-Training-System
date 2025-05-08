@@ -89,22 +89,20 @@ a:not(.no-hover):hover {
 
 /*全局內容區域*/
 .content-container {
+  margin: 5%;
   width: 100%;
   max-width: 1200px;
-  margin: auto;
-  padding: 0 20px;
   box-sizing: border-box;
 }
 /*內容頁面*/
 .page-container {
+  margin: 0 250px 0 200px;
   width: 100%;
   max-width: 1000px;
-  margin: 5%; 
   padding: 30px;
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-
 }
 
 .page-container:hover {
