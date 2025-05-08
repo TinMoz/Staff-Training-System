@@ -49,7 +49,7 @@ const handleLogout = () => {
     <el-main>
     <div class="content-container">
       <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
+      <transition name="fade-page" mode="out-in">
         <component :is="Component" :key="routeKey" />
       </transition>
     </router-view>
@@ -60,3 +60,4 @@ const handleLogout = () => {
 
 
 <style src="./styles/main.css"></style>
+
