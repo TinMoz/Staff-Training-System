@@ -15,6 +15,7 @@ import staff.training.system.repository.ProgressRepository;
 import staff.training.system.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 //此Controller提供了管理員專屬的API接口，主要用於課程的刪除及生產預設Admin的操作
 @RestController
 @RequestMapping("/api/admin")// 管理員專屬接口
