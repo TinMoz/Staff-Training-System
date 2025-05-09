@@ -29,7 +29,6 @@ const handleLogout = () => {
         <router-link to="/home">首頁</router-link>
         <router-link to="/courses">課程列表</router-link>
         <router-link v-if="userStore.role === 'ADMIN'" to="/admin">管理員頁面</router-link>
-        <router-link to="/system">系統</router-link>
         <router-link v-if="userStore.role === 'USER'" to="/user-courses">你的課程</router-link>
         <router-link v-if="userStore.role === 'USER'" to="/user-timetable">時間表</router-link>
       </div>
