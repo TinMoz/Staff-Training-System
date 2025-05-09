@@ -1,6 +1,5 @@
 //courseStore.ts
 import {defineStore} from 'pinia';
-import axios from 'axios';
 import service from '../utils/request';
 //定義課程的接口
 interface Course {
