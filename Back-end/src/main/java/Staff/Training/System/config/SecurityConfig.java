@@ -55,7 +55,7 @@ public class SecurityConfig {
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); //添加JWT過濾器，處理身份驗證請求
         return http.build();
     }
-    //配置Cors，允許前端(http://localhost:5173)與後端API交互發起誇域請求
+    //配置Cors，允許前端與後端API交互發起誇域請求
     @Bean
     public CorsConfigurationSource corsConfigurationSource() { 
         CorsConfiguration config = new CorsConfiguration();
