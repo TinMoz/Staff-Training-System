@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://staff-training-system-744605943289.us-central1.run.app", // 後端端口
+        target: "https://localhost:8080", // 後端端口
         changeOrigin: true,
       },
     },
