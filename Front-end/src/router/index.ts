@@ -12,6 +12,7 @@ const HomeView = () => import('../views/HomeView.vue')
 const RegisterView = () => import('../views/RegisterView.vue')
 const UserCourseView = () => import('../views/UserCourseView.vue')
 const UserTimetableView = () => import('../views/TimetableView.vue')
+const System = () => import('../views./System.vue')
 //路由各個頁面位置
 const routes: Array<RouteRecordRaw> = [
   //登入頁面
@@ -76,6 +77,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'UserTimetable',
     component: UserTimetableView,
     meta: { requiresAuth: true, requiresUser: true }
+  },
+  {
+    path: '/system',
+    name: 'system',
+    component: System,
+
   }
 ];
 
