@@ -19,5 +19,8 @@ WORKDIR /app
 # 從構建階段複製 JAR 文件
 COPY --from=build /app/target/*.jar app.jar
 
+# Set environment variables
+ENV SPRING_PROFILES_ACTIVE=cloud
+
 # 運行應用程式
-CMD ["java", "-Dserver.port=${PORT:-8080}", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
