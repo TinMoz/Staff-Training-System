@@ -13,8 +13,8 @@ Store/
 
 target/
 *.jar
-application.properties  # 避免上传敏感配置
-resources/
+application.properties
+
 # 通用
 .idea/
 *.iml
