@@ -21,6 +21,10 @@ COPY --from=build /app/target/*.jar app.jar
 
 # Set environment variables
 ENV SPRING_PROFILES_ACTIVE=cloud
+ENV PORT=8080
+
+# 暴露端口
+EXPOSE ${PORT}
 
 # 運行應用程式
 CMD ["java", "-jar", "app.jar"]
