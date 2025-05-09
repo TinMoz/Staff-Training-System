@@ -19,14 +19,13 @@ public class CloudSqlConfig {
         dataSource.setJdbcUrl(String.format("jdbc:mysql:///%s", 
                               System.getenv().getOrDefault("DB_NAME", "staff_training_system_database")));
         
-        // Configure the socket factory
+        // Configure the socket factory for Cloud SQL
         dataSource.addDataSourceProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
         dataSource.addDataSourceProperty("cloudSqlInstance", System.getenv("CLOUD_SQL_CONNECTION_NAME"));
         
-        
         // Set database credentials
         dataSource.setUsername(System.getenv().getOrDefault("DB_USER", "root"));
-        dataSource.setPassword(System.getenv("DB_PASSWORD"));
+        dataSource.setPassword(System.getenv().getOrDefault("DB_PASSWORD", ""));
         
         return dataSource;
     }
