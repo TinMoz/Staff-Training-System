@@ -13,7 +13,7 @@ Store/
 
 target/
 *.jar
-application.properties
+
 
 # 通用
 .idea/

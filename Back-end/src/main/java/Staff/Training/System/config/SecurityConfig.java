@@ -59,7 +59,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() { 
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173")); //前端地址
+        config.setAllowedOrigins(List.of("http://localhost:5173",
+        "staff-training-system-git-main-tinmozs-projects.vercel.app")); //前端地址
         config.setAllowedMethods(List.of("*")); //允許所有HTTP方法
         config.setAllowedHeaders(List.of("*")); //允許所有HTTP標頭
         config.setAllowCredentials(true); //允許攜帶憑證
