@@ -2,6 +2,10 @@
 
 這是一個用於公司內部員工培訓的網頁應用系統。系統允許管理員創建培訓課程及處理員工報名課程事宜，員工亦可瀏覽系統內的課程及其章節並跟踪學習進度和查看個人時間表。
 
+## 目前此項目已經部署上線:staff-training-system.vercel.app即可使用
+- 前端部分使用Vercel部署+後端使用GoogleCloudRun進行部署+SQL伺服器選擇TidbCloud
+
+
 ## 主要功能
 
 - 用戶認證與授權(管理員/用戶)
@@ -71,9 +75,10 @@
 
 2.輸入 'SOURCE /your path/Staff_Training_System/init.sql' 以配置SQL
 
-3.在後端/Back-end/src/main/下方添加resources文件夾並新增application.properties以設置數據庫
+3.在後端/Back-end/src/main/resources/application.properties設置數據庫資料
 
-4.在前端/Front-end/src/utils/request下配置你的後端地址 如http://localhost:8080
+4.在前端/Front-end/src/utils/request.ys及前端根目錄Vite.config.ts下配置你的後端地址 
+  如http://localhost:8080
 
 5.打開新的cmd 進入項目的後端部分 'cd /your path/Staff_Training_System/Back-end'
 
@@ -93,8 +98,6 @@
 
 application.properties設置數據庫:
 
-在application.properties內輸入以下字段
-
     spring.datasource.url=jdbc:mysql://localhost:3306/staff_training_system_database
     spring.datasource.username=root
     spring.datasource.password=你的MySQL密碼 需自行填寫
@@ -103,7 +106,7 @@ application.properties設置數據庫:
 
 ## 演示帳戶
 
-系統預設了以下測試帳戶：
+系統預設了以下演示帳戶：
 
 - 管理員: admin / admin123
 - 一般用戶: test / test
