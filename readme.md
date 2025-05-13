@@ -20,7 +20,7 @@
 
 ### 前端: Vue框架 + ts
 
-        --使用Pinia管理Store以及Router路由管理進行頁面跳轉
+        --使用Pinia管理不同頁面的相應Store
 
         --使用element plus UI組件庫搭建前端UI畫面
 
