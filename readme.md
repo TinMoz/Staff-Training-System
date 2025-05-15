@@ -16,7 +16,7 @@
 
 ## 技術
 
-本項目採用前後端分離開發並使用 MVC 開發模式(後端處理Model和Controller部分 前端處理View部分)
+本項目採用前後端分離架構開發並使用Restful API鏈接
 
 ### 前端: Vue框架 + ts
 
