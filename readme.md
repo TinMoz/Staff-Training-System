@@ -1,6 +1,5 @@
-![Preview](./Preview.png)
 ## 员工培训系统
-
+![Preview](./Preview.png)
 這是一個用於公司內部員工培訓的網頁應用系統。系統允許管理員創建培訓課程及處理員工報名課程事宜，員工亦可瀏覽系統內的課程及其章節並跟踪學習進度和查看個人時間表。
 
 ## 目前此項目已經部署上線:staff-training-system.vercel.app即可使用
