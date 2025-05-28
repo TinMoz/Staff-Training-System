@@ -1,6 +1,7 @@
 //courseStore.ts
 import {defineStore} from 'pinia';
 import service from '../utils/request';
+
 //定義課程的接口
 interface Course {
     id: string;
@@ -27,7 +28,7 @@ export const useCourseStore = defineStore('course', {
             teacher: String;
             chapters: { id: string; title: string; content: string; duration: number; }[];
         } | null,
-        lastFetch: 0, // 添加 lastFetch 屬性以追蹤上次獲取時間
+        lastFetch: 0
     }),
     getters: {
         adminCourses: (state) => state.courses, // 更新此 getter 以返回課程
@@ -126,7 +127,6 @@ export const useCourseStore = defineStore('course', {
                 console.error('請求詳情:', (err as any).config);
                 throw err;
             }
-        },
-        
+        }
     }
 });

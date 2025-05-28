@@ -38,7 +38,6 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   // 計算屬性：分頁
   const paginatedChapters = computed(() => {
     if (!courseStore.detail?.chapters) return [];
-    
     const start = (currentPage.value - 1) * pageSize.value;
     const end = start + pageSize.value;
     return courseStore.detail.chapters.slice(start, end);
@@ -145,7 +144,6 @@ export const useCourseDetailStore = defineStore('courseDetail', () => {
   async function checkEnrollmentEligibility() {
     try {
       checkingEnrollment.value = true;      
-      
       canEnroll.value = true;
       enrollmentCheckMessage.value = '';
       
