@@ -16,6 +16,8 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
+RUN apk update && apk add --no-cache ca-certificates
+
 # 從構建階段複製 JAR 文件
 COPY --from=build /app/target/*.jar app.jar
 
@@ -28,7 +30,7 @@ ENV JAVA_OPTS="-Xmx512m -Xms256m"
 # 暴露端口
 EXPOSE ${PORT} 
 
-RUN apt-get update && apt-get install -y ca-certificates
+
 
 # 運行應用程式
 CMD ["sh", "-c", "java ${JAVA_OPTS} -jar app.jar"]
