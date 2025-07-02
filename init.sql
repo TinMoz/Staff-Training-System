@@ -7,6 +7,7 @@ CREATE DATABASE staff_training_system_database
   COLLATE utf8mb4_0900_ai_ci;
 
 
+
 USE staff_training_system_database;
 
 -- 創建 users 表
