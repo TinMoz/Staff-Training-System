@@ -26,7 +26,7 @@ ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
 
 # 暴露端口
-EXPOSE ${PORT}
+EXPOSE ${PORT} 
 
 # 運行應用程式
 CMD ["sh", "-c", "java ${JAVA_OPTS} -jar app.jar"]
