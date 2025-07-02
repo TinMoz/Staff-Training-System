@@ -109,4 +109,4 @@ application.properties設置數據庫:
 系統預設了以下演示帳戶：
 
 - 管理員: admin / admin123
-- 一般用戶: test / test
+- 一般用戶: Test / Test
