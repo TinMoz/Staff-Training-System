@@ -31,4 +31,4 @@ EXPOSE ${PORT}
 
 
 # 運行應用程式
-CMD ["sh", "-c", "java ${JAVA_OPTS} -jar app.jar"]
+CMD ["sh", "-c", "echo $DB_URL && echo $DB_USERNAME && echo $DB_PASSWORD && java ${JAVA_OPTS} -jar app.jar"]
