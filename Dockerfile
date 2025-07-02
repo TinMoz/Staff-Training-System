@@ -12,9 +12,6 @@ COPY ./Back-end/mvnw.cmd ./mvnw.cmd
 # 構建應用程式
 RUN mvn clean package -DskipTests
 
-# 查看 /app/target 目錄下的文件
-RUN ls /app/target
-
 # 運行階段
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
@@ -22,7 +19,7 @@ WORKDIR /app
 RUN apk update && apk add --no-cache ca-certificates
 
 # 從構建階段複製 JAR 文件
-COPY --from=build /app/target/staff-training-system-*.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 # Set environment variables
 ENV SPRING_PROFILES_ACTIVE=cloud
@@ -31,7 +28,7 @@ ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
 
 # 暴露端口
-EXPOSE 8080
+EXPOSE ${PORT}
 
 
 
