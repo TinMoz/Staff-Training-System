@@ -28,7 +28,7 @@ ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
 
 # 暴露端口
-EXPOSE 8080
+EXPOSE $PORT
 
 
 
