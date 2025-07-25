@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://staff-training-system-2-744605943289.us-central1.run.app", // 後端URL
+        target: "p01--stp--vnwzhrpwlmrg.code.run", // 後端URL
         changeOrigin: true,
       },
     },
