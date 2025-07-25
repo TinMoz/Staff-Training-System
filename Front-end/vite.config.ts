@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "p01--stp--vnwzhrpwlmrg.code.run", // 後端URL
+        target: "https://p01--stp--vnwzhrpwlmrg.code.run", // 後端URL
         changeOrigin: true,
       },
     },

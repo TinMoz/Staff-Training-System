@@ -5,7 +5,7 @@ import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 //此為axios的請求攔截器，主要用於攔截請求並添加JWT token到請求頭中
 //建立AnxiosInstance
 const service: AxiosInstance = axios.create({
-    baseURL: "p01--stp--vnwzhrpwlmrg.code.run",//後端API的URL，建立後端鏈接
+    baseURL: "https://p01--stp--vnwzhrpwlmrg.code.run",//後端API的URL，建立後端鏈接
     timeout: 10000, //請求超時時間
 });
 
